@@ -46,7 +46,7 @@ class LoginController extends Controller
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password'])))
         {
-            return redirect()->route('dashboard-patient');
+            return redirect('dashboard-patient');
         }else{
             return redirect()->route('login')
                 ->with('error','Email-Address And Password Are Wrong.');
