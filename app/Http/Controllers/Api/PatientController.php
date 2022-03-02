@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class PatientController extends Controller
 {
@@ -33,7 +34,7 @@ class PatientController extends Controller
         $patient->prenom = $request->prenom;
         $patient->email = $request->email;
         $patient->username = $request->username;
-        $patient->password = "sdsds";
+        $patient->password = Hash::make($request['password']);
         $patient->date_de_naissance = $request->date_de_naissance;
         $patient->etat = $request->etat;
         $patient->save();

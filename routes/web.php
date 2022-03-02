@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/dashboard-patient', function () {
-    return view('patient.dashboard-patient');
-});
+;
+
+Auth::routes();
+Route::get('/dashboard-patient', [App\Http\Controllers\HomeController::class, 'patient']);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
