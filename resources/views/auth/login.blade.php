@@ -25,7 +25,7 @@
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
                                         <div class="form-group">
-                                            <label class="mb-1"><strong>{{ __('UserName') }}</strong></label>
+                                            <label class="mb-1"><strong>{{ __('UserName or Email') }}</strong></label>
                                             <input type="text"  class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus value="username">
                                             @error('username')
                                             <span class="invalid-feedback" role="alert">
@@ -44,21 +44,17 @@
                                         <div class="form-row d-flex justify-content-between mt-4 mb-2">
                                             <div class="form-group">
                                                <div class="custom-control custom-checkbox ml-1">
-													<input type="checkbox" class="custom-control-input" id="basic_checkbox_1">
+													<input type="checkbox" class="custom-control-input" name="remember_me" value="1" id="basic_checkbox_1">
 													<label class="custom-control-label" for="basic_checkbox_1">Remember my preference</label>
 												</div>
                                             </div>
-                                            <div class="form-group">
-                                                <a href="page-forgot-password.html">Forgot Password?</a>
-                                            </div>
+                                            
                                         </div>
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary btn-block">Sign Me In</button>
                                         </div>
                                     </form>
-                                    <div class="new-account mt-3">
-                                        <p>Don't have an account? <a class="text-primary" href="./page-register.html">Sign up</a></p>
-                                    </div>
+                    
                                 </div>
                             </div>
                         </div>
