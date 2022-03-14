@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ProfilController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,4 +20,5 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/dashboard-patient', [App\Http\Controllers\HomeController::class, 'patient']);
+Route::resource('/dashboard-patient/profil',ProfilController::class);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

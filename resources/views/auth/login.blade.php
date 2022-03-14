@@ -25,7 +25,7 @@
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
                                         <div class="form-group">
-                                            <label class="mb-1"><strong>{{ __('UserName or Email') }}</strong></label>
+                                            <label class="mb-1"><strong>{{ __('Username or Email') }}</strong></label>
                                             <input type="text"  class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus value="username">
                                             @error('username')
                                             <span class="invalid-feedback" role="alert">
