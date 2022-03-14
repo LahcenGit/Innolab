@@ -19,6 +19,6 @@ Route::get('/', function () {
 ;
 
 Auth::routes();
-Route::get('/dashboard-patient', [App\Http\Controllers\HomeController::class, 'patient']);
-Route::resource('/dashboard-patient/profil',ProfilController::class);
+Route::get('/dashboard-patient', [App\Http\Controllers\HomeController::class, 'patient'])->middleware('can:dashboard.patient');
+Route::resource('/dashboard-patient/profil',ProfilController::class)->middleware('can:dashboard.patient');;
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

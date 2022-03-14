@@ -21,9 +21,10 @@ class ProfilController extends Controller
     public function update(Request $request, $id){
       
         $user = User::find($id);
+        if($request->password){
         $user->password = Hash::make($request['password']);
-        
+        }
         $user->save();
-        return view('patient.dashboard-patient');
+        return redirect('dashboard-patient');
     }
 }
