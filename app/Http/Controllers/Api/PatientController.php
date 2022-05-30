@@ -29,17 +29,19 @@ class PatientController extends Controller
     {
         //
         if($request->key == 32443131311){
-        $patient = new User();
-        $patient->nom = $request->nom;
-        $patient->prenom = $request->prenom;
-        $patient->email = $request->email;
-        $patient->username = $request->username;
-        $patient->password = Hash::make($request['password']);
-        $patient->date_de_naissance = $request->date_de_naissance;
-        $patient->etat = $request->etat;
-        $patient->type = "patient";
-        $patient->save();
-        return $patient;
+            $patient = new User();
+            $patient->nom = $request->nom;
+            $patient->id_logiciel = $request->id_logiciel;
+            $patient->prenom = $request->prenom;
+            $patient->email = $request->email;
+            $patient->phone = $request->phone;
+            $patient->username = $request->username;
+            $patient->password = Hash::make($request['password']);
+            $patient->date_de_naissance = $request->date_de_naissance;
+            $patient->etat = $request->etat;
+            $patient->sexe = $request->sexe;
+            $patient->save();
+            return $patient;
         }
         else return "error";
     }

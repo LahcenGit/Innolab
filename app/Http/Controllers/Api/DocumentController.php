@@ -29,12 +29,15 @@ class DocumentController extends Controller
     public function store(Request $request)
     {
         //
+
         if($request->key == 32443131311){
         $document = new Document();
-        $user = User::where('username',$request->username)->first();
+        $user = User::where('id_logiciel',$request->id_logiciel)->first();
         $document->user_id = $user->id;
-        $document->name = $request->name;
+
+        $document->document_name = $request->document_name;
         $document->analyse = $request->analyse;
+        $document->etat = $request->etat;
         $document->save();
         return $document;
         }

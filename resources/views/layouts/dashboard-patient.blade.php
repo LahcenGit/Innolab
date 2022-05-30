@@ -17,6 +17,19 @@
 
 </head>
 
+<style>
+        text-primary{
+		color: #fff;
+		background-color: #0083CC;
+		border-color: #0083CC;
+		}
+        btn-ab{
+		color: #fff;
+		background-color: #0083CC;
+		border-color: #0083CC;
+		}
+</style>
+
 <body>
 
     <!--*******************

@@ -21,5 +21,10 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/dashboard-patient', [App\Http\Controllers\HomeController::class, 'patient']);
 //->middleware('can:dashboard.patient');
-Route::resource('/dashboard-patient/profil',ProfilController::class)->middleware('can:dashboard.patient');;
+Route::resource('/dashboard-patient/profil',ProfilController::class)->middleware('can:dashboard.patient');
+
+//affichage result patient
+Route::get('/consultation/{name}', [App\Http\Controllers\ConsultationController::class, 'showConsultation']);
+Route::get('/consultation-pdf/{name}', [App\Http\Controllers\ConsultationController::class, 'showPdf']);
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
