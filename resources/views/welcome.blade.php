@@ -25,7 +25,7 @@
                                 <div class="auth-form">
                                     <div class="text-center">
                                         <img src="{{asset('Dashboard/images/ab-logo.png')}}" height="100%" width="100%" class="mb-4" alt=""><br/>
-                                        <h4 class="text-center mb-4 " style="color:#0083CC ">Bienvenue au laboratoire d'analyses médicales ABI-AYAD</h4>
+                                        <h4 class="text-center mb-4 " style="color:#0083CC ">Bienvenue au laboratoire d'analyses médicales <br> ABI-AYAD</h4>
                                     </div>
                                     
                                     <form method="POST" action="{{ route('login') }}">
@@ -38,7 +38,7 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                        <div class="form-group">
+                                        <div class="form-group mt-2">
                                             <label class="mb-1"><strong>{{ __('Mot de passe') }}</strong></label>
                                             <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" >
                                             @error('password')
@@ -51,13 +51,13 @@
                                             <div class="form-group">
                                                <div class="custom-control custom-checkbox ml-1">
 													<input type="checkbox" class="custom-control-input" name="remember_me" value="1" id="basic_checkbox_1">
-													<label class="custom-control-label" for="basic_checkbox_1">Souvenez-vous de ma préférence</label>
+													<label class="custom-control-label" for="basic_checkbox_1">Se souvenir de moi</label>
 												</div>
                                             </div>
                                             
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-primary btn-block" style="background-color: #0083CC; border-color: #0083CC; padding-top:12px;">Sign Me In</button>
+                                            <button type="submit" class="btn btn-primary btn-block" style="background-color: #0083CC; border-color: #0083CC; padding-top:12px;">Se connecter</button>
                                         </div>
                                     </form>
                     

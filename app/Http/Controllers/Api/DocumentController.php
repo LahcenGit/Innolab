@@ -26,10 +26,10 @@ class DocumentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         //
-
         if($request->key == 32443131311){
         $document = new Document();
         $user = User::where('id_logiciel',$request->id_logiciel)->first();
@@ -62,9 +62,16 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateDocument(Request $request)
     {
-        //
+      
+        if($request->key == 32443131311){
+            $document = Document::where('document_name',$request->document_name)->first();
+            $document->etat = $request->etat;
+            $document->save();
+            return $document;
+            }
+            else return "error";
     }
 
     /**

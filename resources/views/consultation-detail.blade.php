@@ -44,21 +44,18 @@
                                     @endif
                                     @if($document->etat == 2)
                                      <label class="mb-1"><strong>Etat : </strong> Payé</label>  <i style="color:#00c855" class="ml-2 fa-solid fa-circle"></i> <br>
+                                     <div class="center" style="text-align: center;">
+                                        <a href="{{asset('files/'.$document->document_name.'.pdf')}}" class="btn btn-primary btn-block mt-4" style="background-color: #0083CC; border-color: #0083CC; padding-top:12px;" >
+                                            Affichier le Resultat <i class="ml-2 fa-solid fa-file-lines fa-xl"></i>   </a>
+                                    </div>
                                     @endif
                                    
                                 
                                     
-                                    <div class="center" style="text-align: center;">
-                                        <a href="{{asset('files/'.$document->document_name.'.pdf')}}" class="btn btn-primary btn-block mt-4" style="background-color: #0083CC; border-color: #0083CC; padding-top:12px;" >
-                                            Affichier le Resultat <i class="ml-2 fa-solid fa-file-lines fa-xl"></i>   </a>
-                                      </div>
-                                      
-                                       
-                                      
                                     
                                     
                                     <div class="new-account mt-3">
-                                        <p>Avez-vous une remarque ? <a  style="color:#0083CC " href="{{asset('/register')}}">Contactez-nous</a></p>
+                                        <p>Avez-vous une remarque ? <a  style="color:#0083CC " href="#">Contactez-nous</a></p>
                                     </div>
                                 </div>
                             </div>

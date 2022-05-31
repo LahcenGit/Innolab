@@ -39,6 +39,7 @@ class PatientController extends Controller
             $patient->password = Hash::make($request['password']);
             $patient->date_de_naissance = $request->date_de_naissance;
             $patient->etat = $request->etat;
+            $patient->type = $request->type;
             $patient->sexe = $request->sexe;
             $patient->save();
             return $patient;
