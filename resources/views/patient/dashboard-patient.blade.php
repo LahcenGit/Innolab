@@ -3,14 +3,14 @@
 @section('content')
  
 
-<div class="content-body">
+<div class="content-body mt-4" style="margin-left: 0!important;">
 
-	<div class="container-fluid">
+	<div class="container">
 		<div class="row page-titles mx-0">
 			<div class="col-sm-6 p-md-0">
 				<div class="welcome-text">
-					<h4>Bonjour, Bienvenue!</h4>
-					<span>Comptes rendus</span>
+					<h4>{{Str::ucfirst($user->nom)}} {{Str::ucfirst($user->prenom)}} , 28 ans</h4>
+					<span>Masculin</span>
 				</div>
 			</div>
 			<div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -20,22 +20,75 @@
 				</ol>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-xl-4">
-				<div class="card">
-					
-					<div class="card-body">
-						<div class="text">
-							<label class="mb-2"><i class="fa fa-user"></i><strong>    Patient : </strong>  {{$user->nom}} {{$user->prenom}} </label><br>
-							<label class="mb-2"><i class="fa fa-calendar"></i><strong>   Date de naissance : </strong>{{$user->date_de_naissance}} </label><br>
-							<label class="mb-2"><i class="fa fa-calendar"></i><strong>   Sexe : </strong>{{$user->sexe}} </label><br>
-			        </div>
-					</div>
-					
-				</div>
+		
+		<h6 class="card-title ml-2">Compte(s) rendu(s) consulté(s)</h6>
+
+		<div class="card">
+			<div class="card-header">
+			<h4 class="card-title">2022</h4>
 			</div>
-		</div>
-		<h6 class="card-title">Compte(s) rendu(s) consulté(s)</h6>
+			<div class="card-body">
+			
+			<div class="custom-tab-1">
+			<ul class="nav nav-tabs">
+			<li class="nav-item">
+			<a class="nav-link" data-toggle="tab" href="#home1"> Juin</a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" data-toggle="tab" href="#profile1">Profile</a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link active" data-toggle="tab" href="#contact1"> Contact</a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" data-toggle="tab" href="#message1">Message</a>
+			</li>
+			</ul>
+			<div class="tab-content">
+			<div class="tab-pane fade" id="home1" role="tabpanel">
+			<div class="pt-4">
+				<h4>MArdi 02 Juin 2022, 11:30</h4>
+				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
+				</p>
+				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
+				<h4>This is home title</h4>
+				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
+				</p>
+				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
+			</p>
+			</div>
+			</div>
+			<div class="tab-pane fade" id="profile1">
+			<div class="pt-4">
+			<h4>This is profile title</h4>
+			<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
+			</p>
+			<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
+			</p>
+			</div>
+			</div>
+			<div class="tab-pane fade active show" id="contact1">
+			<div class="pt-4">
+			<h4>This is contact title</h4>
+			<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
+			</p>
+			<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
+			</p>
+			 </div>
+			</div>
+			<div class="tab-pane fade" id="message1">
+			<div class="pt-4">
+			<h4>This is message title</h4>
+			<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
+			</p>
+			<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
+			</p>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
 		
 		@foreach($documents as $document)
 		<div class="row">

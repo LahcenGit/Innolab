@@ -52,45 +52,16 @@
     ***********************************-->
     <div id="main-wrapper">
 
-        <!--**********************************
-            Nav header start
-        ***********************************-->
-        <div class="nav-header">
-            <a href="index.html" class="brand-logo">
-                
-                <img class="brand-title" src="{{asset('Dashboard/images/ab-logo.png')}}" alt="">
-            </a>
-
-            <div class="nav-control">
-                <div class="hamburger">
-                    <span class="line"></span><span class="line"></span><span class="line"></span>
-                </div>
-            </div>
-        </div>
-        <!--**********************************
-            Nav header end
-        ***********************************-->
-		
-	
 		
         <!--**********************************
             Header start
         ***********************************-->
-        <div class="header">
-            <div class="header-content">
+        <div class="header d-flex justify-content-center" >
+            <div class="header-content container" >
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
-                        <div class="header-left">
-                            <div class="search_bar dropdown">
-                                <span class="search_icon p-3 c-pointer" data-toggle="dropdown">
-                                    <i class="mdi mdi-magnify"></i>
-                                </span>
-                                <div class="dropdown-menu p-0 m-0">
-                                    <form>
-                                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                                    </form>
-                                </div>
-                            </div>
+                        <div class="header-left" style="margin-top: 20px; margin-left:-60px;">
+                                <img src="{{asset('Dashboard/images/ab-logo.png')}}" height="100%" width="100%" class="mb-4" alt=""><br/>
                         </div>
 
                         <ul class="navbar-nav header-right">
@@ -129,11 +100,7 @@
                                     </form>
                                 </div>
                             </li>
-							<li class="nav-item right-sidebar">
-                                <a class="nav-link bell ai-icon" href="#">
-                                    <svg id="icon-menu" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-                                </a>
-							</li>
+							
                         </ul>
                     </div>
                 </nav>
