@@ -23,106 +23,79 @@
 		
 		<h6 class="card-title ml-2">Compte(s) rendu(s) consulté(s)</h6>
 
+		@foreach($yearsDocuments as $yearsDocument)
 		<div class="card">
 			<div class="card-header">
-			<h4 class="card-title">2022</h4>
+			<h4 class="card-title">{{$yearsDocument->year}}</h4>
 			</div>
 			<div class="card-body">
-			
-			<div class="custom-tab-1">
+			<div class="default-tab">
 			<ul class="nav nav-tabs">
-			<li class="nav-item">
-			<a class="nav-link" data-toggle="tab" href="#home1"> Juin</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link" data-toggle="tab" href="#profile1">Profile</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link active" data-toggle="tab" href="#contact1"> Contact</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link" data-toggle="tab" href="#message1">Message</a>
-			</li>
+				@foreach($monthDocuments as $monthDocument)
+				@if($monthDocument->year == $yearsDocument->year)
+				<li class="nav-item ">
+				<button class="btn btn-ligh " year="{{$yearsDocument->year}}" month="{{$monthDocument->month}}" id="checkmonth">{{$monthDocument->month}}</button>
+				</li>
+				@endif
+			   @endforeach
 			</ul>
-			<div class="tab-content">
-			<div class="tab-pane fade" id="home1" role="tabpanel">
-			<div class="pt-4">
-				<h4>MArdi 02 Juin 2022, 11:30</h4>
-				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
-				</p>
-				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
-				<h4>This is home title</h4>
-				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
-				</p>
-				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
-			</p>
-			</div>
-			</div>
-			<div class="tab-pane fade" id="profile1">
-			<div class="pt-4">
-			<h4>This is profile title</h4>
-			<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
-			</p>
-			<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
-			</p>
-			</div>
-			</div>
-			<div class="tab-pane fade active show" id="contact1">
-			<div class="pt-4">
-			<h4>This is contact title</h4>
-			<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
-			</p>
-			<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
-			</p>
-			 </div>
-			</div>
-			<div class="tab-pane fade" id="message1">
-			<div class="pt-4">
-			<h4>This is message title</h4>
-			<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
-			</p>
-			<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
-			</p>
+			<div class="tab-content" id="add-detail">
+				
 			</div>
 			</div>
 			</div>
 			</div>
-			</div>
-			</div>
-		
-		@foreach($documents as $document)
-		<div class="row">
-			<div class="col-xl-8">
-				<div class="card">
-					
-					<div class="card-body">
-						<div class="text">
-							
-							        <label class="mb-1"><strong>Détails de votre consultation : </strong></label> <br>
-                                    <label class="mb-1"><strong>Date : </strong> {{$document->date}}</label> <br>
-                                    <label class="mb-1"><strong>Analyse : </strong> {{$document->analyse}}</label> <br>
-
-                                    @if($document->etat== 0)
-                                     <label class="mb-1"><strong>Etat : </strong> En cours...</label>  <i style="color:#0089c8" class="ml-2 fa fa-circle"></i> <br>
-                                    @endif
-                                    @if($document->etat == 1)
-                                     <label class="mb-1"><strong>Etat : </strong> Attendre le paiement</label>  <i style="color:#e78c03" class="ml-2 fa fa-circle"></i> <br>
-                                    @endif
-                                    @if($document->etat == 2)
-                                     <label class="mb-1"><strong>Etat : </strong> Payé</label>  <i style="color:#00c855" class="ml-2 fa fa-circle"></i> <br>
-                                     <div class="center" style="text-align: center;">
-                                        <a href="{{asset('files/'.$document->document_name.'.pdf')}}" class="btn btn-primary btn-block mt-4" style="background-color: #0083CC; border-color: #0083CC; padding-top:12px;" >
-                                            Affichier le Resultat <i class="ml-2 fa-solid fa-file-lines fa-xl"></i>   </a>
-                                    </div>
-                                    @endif
-						</div>
-					</div>
-					
-				</div>
-			</div>
-		</div>	
 		@endforeach
 	</div>
 </div>
 
 @endsection
+
+@push('consultation-detail')
+<script>
+  $.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+$("#checkmonth").on('click',function() {
+   
+	var month = $(this).attr("month");
+    var year = $(this).attr("year");
+	var data ="";
+  $.ajax({
+    url: '/consultation-detail/'+month+'/'+year,
+    type: "GET",
+    success: function (res) {
+		$.each(res, function(i, res) {
+			if(res.etat == 0){
+				line = '<label class="mb-1"><strong>Etat : </strong> En cours...</label>  <i style="color:#0089c8" class="ml-2 fa fa-circle"></i> <br>'
+			}
+			if(res.etat == 1){
+				line = '<label class="mb-1"><strong>Etat : </strong> Attendre le paiement</label>  <i style="color:#e78c03" class="ml-2 fa fa-circle"></i> <br>'
+			}
+			else{
+				line = '<label class="mb-1"><strong>Etat : </strong> Payé</label>  <i style="color:#00c855" class="ml-2 fa fa-circle"></i> <br>'+
+						'<div class="center" style="text-align: center;">'+
+						'<a href="" class="btn btn-primary btn-block mt-4" style="background-color: #0083CC; border-color: #0083CC; padding-top:12px;" >Affichier le Resultat <i class="ml-2 fa-solid fa-file-lines fa-xl"></i> </a>'+
+					   '</div>'
+			}
+         data = data+'<div class="tab-pane fade" id="home1">'+
+				'<div class="pt-4">'+
+				'<h4>Détail de votre consultation</h4>'+
+				    '<div class="text">'+
+					'<label class="mb-1"><strong>Date : </strong>'+res.date+'</label> <br>'+
+					'<label class="mb-1"><strong>Analyse : </strong>'+res.analyse+'</label> <br>'+
+                     line+
+		            '</div>'+
+				    '</div>'+
+				    '</div>'
+                });
+				$('#add-detail').html(data);
+    }
+  });
+  
+});
+</script>
+@endpush

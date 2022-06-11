@@ -30,7 +30,30 @@ class HomeController extends Controller
     }
     public function patient(){
         $user = User::where('id',Auth::user()->id)->first();
-        $documents = Document::where('user_id',$user->id)->get();
-        return view('patient.dashboard-patient',compact('user','documents'));
+        $yearsDocuments = Document::where('user_id',$user->id)
+                                   ->selectRaw('YEAR(created_at) year')
+                                   ->groupBy('year')
+                                   ->get();
+
+        $monthDocuments = Document::where('user_id',$user->id)
+                                   ->selectRaw('MONTH(created_at) month')
+                                   ->selectRaw('YEAR(created_at) year')
+                                   ->groupBy('month')
+                                   ->groupBy('year')
+                                   ->get();
+       
+        return view('patient.dashboard-patient',compact('user','yearsDocuments','monthDocuments'));
+    }
+
+    public function document($month , $year){
+        $user = User::where('id',Auth::user()->id)->first();
+        $documents = Document::where('user_id',$user->id)
+                               ->select('analyse')
+                               ->select('date')
+                               ->select('etat')
+                               ->whereYear('created_at', $year)
+                               ->whereMonth('created_at', $month)
+                               ->get();
+        return $documents;
     }
 }

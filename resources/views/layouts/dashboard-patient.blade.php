@@ -191,6 +191,6 @@
 
 	})(jQuery);	
 	</script>
-
+@stack('consultation-detail')
 </body>
 </html>
