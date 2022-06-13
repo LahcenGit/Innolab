@@ -31,20 +31,35 @@
 			<div class="card-body">
 			<div class="default-tab">
 			<ul class="nav nav-tabs">
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
 				@foreach($monthDocuments as $monthDocument)
 				@if($monthDocument->year == $yearsDocument->year)
-				<li class="nav-item ">
-				<button class="btn btn-ligh " year="{{$yearsDocument->year}}" month="{{$monthDocument->month}}" id="checkmonth">{{$monthDocument->month}}</button>
-				</li>
+					<li class="nav-item" role="presentation">
+						@if($loop->first)
+						<button class="nav-link checkmonth" month="{{$monthDocument->month}}" year="{{$yearsDocument->year}}" id="{{'home-tab-'.$loop->iteration}}" data-bs-toggle="tab" data-bs-target="#home" type="button" 
+							role="tab" aria-controls="home" aria-selected="false">Mai</button>
+						@else
+						<button class="nav-link checkmonth" month="{{$monthDocument->month}}" year="{{$yearsDocument->year}}" id="{{'home-tab-'.$loop->iteration}}" data-bs-toggle="tab" data-bs-target="#home" type="button" 
+							role="tab" aria-controls="home" aria-selected="false">Juin</button>
+						@endif
+						
+					</li>
 				@endif
 			   @endforeach
+				</ul>
 			</ul>
-			<div class="tab-content" id="add-detail">
-				
+			<div class="tab-content " id="myTabContent">
+				<div class="tab-pane fade show active mt-4" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+					<span> <strong>Date :</strong> 12.06.2021</span> <br>
+					<span> <strong>Analyse :</strong> Fns</span> <br>
+					<label class="mb-1"><strong>Etat : </strong> En cours...</label>  <i style="color:#0089c8" class="ml-2 fa-solid fa-circle"></i> <br>
+					<a href="{{asset('filespdf')}}" class="btn btn-primary btn-block mt-4 col-md-4" style="background-color: #0083CC; border-color: #0083CC; padding-top:12px;" >
+						Affichier le Resultat <i class="fa-solid fa-circle"></i>  </a>
+				</div>
 			</div>
-			</div>
-			</div>
-			</div>
+		</div>
+		</div>
+		</div>
 		@endforeach
 	</div>
 </div>
@@ -59,7 +74,7 @@
   }
 });
 
-$("#checkmonth").on('click',function() {
+$(".checkmonth").on('click',function() {
    
 	var month = $(this).attr("month");
     var year = $(this).attr("year");
@@ -81,18 +96,10 @@ $("#checkmonth").on('click',function() {
 						'<a href="" class="btn btn-primary btn-block mt-4" style="background-color: #0083CC; border-color: #0083CC; padding-top:12px;" >Affichier le Resultat <i class="ml-2 fa-solid fa-file-lines fa-xl"></i> </a>'+
 					   '</div>'
 			}
-         data = data+'<div class="tab-pane fade" id="home1">'+
-				'<div class="pt-4">'+
-				'<h4>Détail de votre consultation</h4>'+
-				    '<div class="text">'+
-					'<label class="mb-1"><strong>Date : </strong>'+res.date+'</label> <br>'+
-					'<label class="mb-1"><strong>Analyse : </strong>'+res.analyse+'</label> <br>'+
-                     line+
-		            '</div>'+
-				    '</div>'+
-				    '</div>'
-                });
-				$('#add-detail').html(data);
+            data = 
+			''
+		});
+		$('#myTabContent').html(data);
     }
   });
   

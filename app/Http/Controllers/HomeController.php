@@ -28,6 +28,7 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
     public function patient(){
         $user = User::where('id',Auth::user()->id)->first();
         $yearsDocuments = Document::where('user_id',$user->id)
@@ -47,13 +48,10 @@ class HomeController extends Controller
 
     public function document($month , $year){
         $user = User::where('id',Auth::user()->id)->first();
-        $documents = Document::where('user_id',$user->id)
-                               ->select('analyse')
-                               ->select('date')
-                               ->select('etat')
+        $document = Document::where('user_id',$user->id)
                                ->whereYear('created_at', $year)
                                ->whereMonth('created_at', $month)
                                ->get();
-        return $documents;
+        return $document;
     }
 }

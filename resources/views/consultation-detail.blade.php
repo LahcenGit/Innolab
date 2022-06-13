@@ -49,10 +49,6 @@
                                             Affichier le Resultat <i class="ml-2 fa-solid fa-file-lines fa-xl"></i>   </a>
                                     </div>
                                     @endif
-                                   
-                                
-                                    
-                                    
                                     
                                     <div class="new-account mt-3">
                                         <p>Avez-vous une remarque ? <a  style="color:#0083CC " href="#">Contactez-nous</a></p>

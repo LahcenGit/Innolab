@@ -14,7 +14,7 @@
     <link href="{{asset('Dashboard/vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet">
     <link href="{{asset('Dashboard/css/style.css')}}" rel="stylesheet">
 	<link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" referrerpolicy="no-referrer" />
 </head>
 
 <style>
@@ -166,6 +166,7 @@
 	<!-- Svganimation scripts -->
 	<script src="{{asset('Dashboard/vendor/svganimation/vivus.min.js')}}"></script>
     <script src="{{asset('Dashboard/vendor/svganimation/svg.animation.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/fontawesome.min.js" referrerpolicy="no-referrer"></script>
     
 	<script>
 	(function($) {
