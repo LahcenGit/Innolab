@@ -35,20 +35,14 @@
 				@foreach($monthDocuments as $monthDocument)
 				@if($monthDocument->year == $yearsDocument->year)
 					<li class="nav-item" role="presentation">
-						@if($loop->first)
 						<button class="nav-link checkmonth" month="{{$monthDocument->month}}" year="{{$yearsDocument->year}}" id="{{'home-tab-'.$loop->iteration}}" data-bs-toggle="tab" data-bs-target="#home" type="button" 
-							role="tab" aria-controls="home" aria-selected="false">Mai</button>
-						@else
-						<button class="nav-link checkmonth" month="{{$monthDocument->month}}" year="{{$yearsDocument->year}}" id="{{'home-tab-'.$loop->iteration}}" data-bs-toggle="tab" data-bs-target="#home" type="button" 
-							role="tab" aria-controls="home" aria-selected="false">Juin</button>
-						@endif
-						
+							role="tab" aria-controls="home" aria-selected="false">{{$monthDocument->created_at->format('F')}}</button>
 					</li>
 				@endif
 			   @endforeach
 				</ul>
 			</ul>
-			<div class="tab-content " id="myTabContent">
+			<div class="tab-content myTabContent">
 				<div class="tab-pane fade show active mt-4" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 					<span> <strong>Date :</strong> 12.06.2021</span> <br>
 					<span> <strong>Analyse :</strong> Fns</span> <br>
@@ -92,14 +86,17 @@ $(".checkmonth").on('click',function() {
 			}
 			else{
 				line = '<label class="mb-1"><strong>Etat : </strong> Payé</label>  <i style="color:#00c855" class="ml-2 fa fa-circle"></i> <br>'+
-						'<div class="center" style="text-align: center;">'+
-						'<a href="" class="btn btn-primary btn-block mt-4" style="background-color: #0083CC; border-color: #0083CC; padding-top:12px;" >Affichier le Resultat <i class="ml-2 fa-solid fa-file-lines fa-xl"></i> </a>'+
-					   '</div>'
+						'<a  class="btn btn-primary btn-block mt-4 col-md-4" style="background-color: #0083CC; border-color: #0083CC; padding-top:12px;" >Affichier le Resultat <i class="fa-solid fa-circle"></i>  </a>'
+						
 			}
-            data = 
-			''
+            data = data + '<div class="tab-pane fade show active mt-4" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">'+
+					'<span> <strong>Date :</strong>' +res.date+ '</span> <br>'+
+					'<span> <strong>Analyse :</strong>' +res.analyse+ '</span> <br>'+
+					  line+
+				    '</div>'
+			
 		});
-		$('#myTabContent').html(data);
+		$('.myTabContent').html(data);
     }
   });
   
