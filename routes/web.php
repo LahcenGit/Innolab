@@ -22,6 +22,7 @@ Auth::routes();
 Route::get('/dashboard-patient',[App\Http\Controllers\HomeController::class,'patient']);
 //->middleware('can:dashboard.patient');
 Route::resource('/dashboard-patient/profil',ProfilController::class)->middleware('can:dashboard.patient');
+Route::get('/dashboard-patient/{year}', [App\Http\Controllers\HomeController::class, 'patientWithYear'])->middleware('can:dashboard.patient');
 
 //affichage result patient
 Route::get('/consultation/{name}', [App\Http\Controllers\ConsultationController::class, 'showConsultation']);

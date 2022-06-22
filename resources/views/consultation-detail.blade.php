@@ -47,7 +47,7 @@
                                      <div class="center" style="text-align: center;">
                                         <a href="{{asset('files/'.$document->document_name.'.pdf')}}" class="btn btn-primary btn-block mt-4" style="background-color: #0083CC; border-color: #0083CC; padding-top:12px;" >
                                             Affichier le Resultat <i class="ml-2 fa-solid fa-file-lines fa-xl"></i>   </a>
-                                    </div>
+                                      </div>
                                     @endif
                                     
                                     <div class="new-account mt-3">
