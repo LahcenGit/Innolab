@@ -28,6 +28,15 @@ class PatientController extends Controller
     public function store(Request $request)
     {
         //
+        $user = User::where('username',$request->username)->first();
+        if($user){
+            return "exist";
+        }
+        $user = User::where('email',$request->email)->first();
+        if($user){
+            return "exist";
+        }
+        
         if($request->key == 32443131311){
             $patient = new User();
             $patient->nom = $request->nom;

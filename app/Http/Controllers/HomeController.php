@@ -45,7 +45,12 @@ class HomeController extends Controller
                                 ->groupBy('year')
                                 ->latest()
                                 ->first();
-        $recent_year =  $recent_year->year;
+        if($recent_year){
+            $recent_year =  $recent_year->year;
+        }
+        else{
+            $recent_year = '0'; 
+        }
 
         $documents = Document::where('user_id',$user->id)
                                    ->whereYear('created_at',$recent_year)

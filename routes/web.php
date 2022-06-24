@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfilController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +16,18 @@ use App\Http\Controllers\ProfilController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    if(Auth::guest()){
+        return redirect('/login');
+    }
+    else{
+        return redirect('/dashboard-patient');
+    }
+ 
 });
-;
+
+
+
 
 Auth::routes();
 Route::get('/dashboard-patient',[App\Http\Controllers\HomeController::class,'patient']);

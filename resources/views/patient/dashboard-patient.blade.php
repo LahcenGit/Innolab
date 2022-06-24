@@ -81,10 +81,13 @@ function translate($month) {
 			<div class="col-md-9 p-md-1">
 				<div class="card ">
 					<div class="card-header">
-						<h4 class="card-title">Compte rendu consulté <a href="#" class="badge badge-primary">{{$recent_year}}</a></h4>
+						<h4 class="card-title">Compte rendu consulté <a href="#" class="badge badge-primary">@if($recent_year !="0") {{$recent_year }} @endif </a></h4>
 					</div>
 
 					<div class="card-body">
+						@if ($recent_year =="0")
+					     <p>Aucune consultation disponible</p>	
+						@endif
 						@foreach ($documents as $document)
 							<div style="background: #ebeef6; padding: 1rem;" class="mb-2">
 								<h4><a href="#" class="badge badge-danger">{{translate($document[0]->month)}}</a></h4> 
