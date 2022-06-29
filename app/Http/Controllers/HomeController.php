@@ -67,7 +67,15 @@ class HomeController extends Controller
         $keys = $documents->keys();
 
 
-       
+
+        $monthDocuments = Document::where('user_id',$user->id)
+                                   ->selectRaw('created_at')
+                                   ->selectRaw('MONTH(created_at) month')
+                                   ->selectRaw('YEAR(created_at) year')
+                                   ->groupBy('created_at')
+                                   ->groupBy('year')
+                                   ->get();
+
         return view('patient.dashboard-patient',compact('user','years','recent_year','documents'));
     }
 
