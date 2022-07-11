@@ -48,10 +48,11 @@ class LoginController extends Controller
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         $remember_me  = ( !empty( $request->remember_me ) )? TRUE : FALSE;
         
-        if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password'])))
+        if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']),$remember_me))
         {
             return redirect('dashboard-patient');
-        }else{
+        }
+        else{
             return redirect()->route('login')
                 ->with('error','Email-Address And Password Are Wrong.');
         }

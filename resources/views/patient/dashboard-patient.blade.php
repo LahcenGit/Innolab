@@ -81,7 +81,7 @@ function translate($month) {
 			<div class="col-md-9 p-md-1">
 				<div class="card ">
 					<div class="card-header">
-						<h4 class="card-title">Compte rendu consulté <a href="#" class="badge badge-primary">@if($recent_year !="0") {{$recent_year }} @endif </a></h4>
+						<h4 class="card-title">Compte rendu  <a href="#" class="badge badge-primary">@if($recent_year !="0") {{$recent_year }} @endif </a></h4>
 					</div>
 
 					<div class="card-body">
@@ -100,13 +100,13 @@ function translate($month) {
 										<label class="mb-1"><strong>Etat : </strong> En cours...</label>  <i style="color:#0089c8" class="ml-2 fa-solid fa-circle"></i> <br>
 										@endif
 										@if($document->etat == 1)
-											<label class="mb-1"><strong>Etat : </strong> Attendre le paiement</label>  <i style="color:#e78c03" class="ml-2 fa-solid fa-circle"></i> <br>
+											<label class="mb-1"><strong>Etat : </strong> En attente de paiement</label>  <i style="color:#e78c03" class="ml-2 fa-solid fa-circle"></i> <br>
 										@endif
 										@if($document->etat == 2)
 											<label class="mb-1"><strong>Etat : </strong> Payé</label>  <i style="color:#00c855" class="ml-2 fa-solid fa-circle"></i> <br>
 											<div class="center mt-2" >
 											<a href="{{asset('files/'.$document->document_name.'.pdf')}}" class="btn btn-primary " style="background-color: #0083CC; border-color: #0083CC; padding-top:12px;" >
-												Affichier le Resultat <i class="ml-2 fa-solid fa-file-lines fa-xl"></i>   </a>
+												Afficher le Resultat <i class="ml-2 fa-solid fa-file-lines fa-xl"></i>   </a>
 											</div>
 										@endif
 									@endforeach
