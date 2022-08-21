@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,11 +15,17 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('laboratory_id');
+            $table->unsignedBigInteger('laboratory_destination_id')->nullable();
+            $table->unsignedBigInteger('doctor_id')->nullable();
+            $table->unsignedBigInteger('patient_id')->nullable();
             $table->string('document_name');
             $table->string('analyse');
-            $table->tinyInteger('etat')->nullable();
+            $table->tinyInteger('flag_etat')->nullable();
             $table->string('date')->nullable();
+            $table->foreign('laboratory_id')->references('id')->on('laboratories')->onDelete('cascade');
+            $table->foreign('laboratory_destination_id')->references('id')->on('laboratories')->onDelete('cascade');
+            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
             $table->timestamps();
         });
     }

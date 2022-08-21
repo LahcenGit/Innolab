@@ -3,13 +3,19 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Detaildocument;
 use App\Models\Document;
+use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 
 class DocumentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -30,18 +36,26 @@ class DocumentController extends Controller
     public function store(Request $request)
     {
         //
-        if($request->key == 32443131311){
         $document = new Document();
-        $user = User::where('id_logiciel',$request->id_logiciel)->first();
-        $document->user_id = $user->id;
-
+        $patient = Patient::where('id_logiciel',$request->id_logiciel)->first();
+        $document->patient_id = $patient->id;
+        $document->laboratory_id = $request->laboratory_id;
         $document->document_name = $request->document_name;
         $document->analyse = $request->analyse;
-        $document->etat = $request->etat;
+        $document->flag_etat = $request->flag_etat;
+        $document->date = $request->date;
         $document->save();
+        for($i = 0 ; $i<count($request->rubrique) ; $i++){
+        $detaildocument = new Detaildocument();
+        $detaildocument->document_id = $document->id;
+        $detaildocument->rubrique = $request->rubrique[$i];
+        $detaildocument->value = $request->value[$i];
+        $detaildocument->unite = $request->unite[$i];
+        $detaildocument->norme = $request->norme[$i];
+        $detaildocument->flag = $request->flag[$i];
+        $detaildocument->save();
         return $document;
         }
-        else return "error";
     }
 
     /**
@@ -63,15 +77,12 @@ class DocumentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function updateDocument(Request $request)
-    {
-      
-        if($request->key == 32443131311){
+    {       
             $document = Document::where('document_name',$request->document_name)->first();
-            $document->etat = $request->etat;
+            $document->flag_etat = $request->flag_etat;
             $document->save();
             return $document;
-            }
-            else return "error";
+           
     }
 
     /**

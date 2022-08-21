@@ -51,8 +51,8 @@ function translate($month) {
 		<div class="row page-titles mx-0">
 			<div class="col-sm-6 p-md-0">
 				<div class="welcome-text">
-					<h4>{{Str::ucfirst($user->nom)}} {{Str::ucfirst($user->prenom)}} </h4>
-					<span> {{$user->date_de_naissance}}, @if($user->sexe == 'm') Masculin @else Féminin @endif</span>
+					<h4>{{Str::ucfirst($patient->first_name)}} {{Str::ucfirst($patient->last_name)}} </h4>
+					<span> {{$patient->date_birth}}, @if($patient->sexe == 'm') Masculin @else Féminin @endif</span>
 				</div>
 			</div>
 			<div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -96,17 +96,18 @@ function translate($month) {
 										<h4 class="mt-3"><strong>{{$document->created_at->format('d-m-Y  H:i')}}</strong></h4>
 										<span> <strong>Analyse :</strong> {{$document->analyse}}</span> <br>
 										
-										@if($document->etat== 0)
+										@if($document->flag_etat== 0)
 										<label class="mb-1"><strong>Etat : </strong> En cours...</label>  <i style="color:#0089c8" class="ml-2 fa-solid fa-circle"></i> <br>
 										@endif
-										@if($document->etat == 1)
+										@if($document->flag_etat == 1)
 											<label class="mb-1"><strong>Etat : </strong> En attente de paiement</label>  <i style="color:#e78c03" class="ml-2 fa-solid fa-circle"></i> <br>
 										@endif
-										@if($document->etat == 2)
+										@if($document->flag_etat == 2)
 											<label class="mb-1"><strong>Etat : </strong> Payé</label>  <i style="color:#00c855" class="ml-2 fa-solid fa-circle"></i> <br>
 											<div class="center mt-2" >
 											<a href="{{asset('files/'.$document->document_name.'.pdf')}}" class="btn btn-primary " style="background-color: #0083CC; border-color: #0083CC; padding-top:12px;" >
 												Afficher le Resultat <i class="ml-2 fa-solid fa-file-lines fa-xl"></i>   </a>
+												<button data-id="{{$document->id}}" class="btn btn-success detail-document" ><i class="fa fa-eye"></i></button>
 											</div>
 										@endif
 									@endforeach
@@ -120,7 +121,9 @@ function translate($month) {
 		</div>
 	</div>
 </div>
+<div id="modal-detaildocument">
 
+</div>
 @endsection
 
 @push('consultation-detail')
@@ -141,10 +144,10 @@ $(".checkmonth").on('click',function() {
     type: "GET",
     success: function (res) {
 		$.each(res, function(i, res) {
-			if(res.etat == 0){
+			if(res.flag_etat == 0){
 				line = '<label class="mb-1"><strong>Etat : </strong> En cours...</label>  <i style="color:#0089c8" class="ml-2 fa fa-circle"></i> <br>'
 			}
-			if(res.etat == 1){
+			if(res.flag_etat == 1){
 				line = '<label class="mb-1"><strong>Etat : </strong> Attendre le paiement</label>  <i style="color:#e78c03" class="ml-2 fa fa-circle"></i> <br>'
 			}
 			else{
@@ -157,6 +160,30 @@ $(".checkmonth").on('click',function() {
 			''
 		});
 		$('#myTabContent').html(data);
+    }
+  });
+  
+});
+</script>
+@endpush
+
+@push('modal-detaildocument-scripts')
+<script>
+  $.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+$(".detail-document").click(function() {
+  
+  var id = $(this).data('id');
+ 
+  $.ajax({
+    url: '/detail-document/'+id ,
+    type: "GET",
+    success: function (res) {
+      $('#modal-detaildocument').html(res);
+      $("#exampleModal").modal('show');
     }
   });
   

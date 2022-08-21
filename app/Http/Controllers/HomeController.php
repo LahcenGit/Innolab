@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Detaildocument;
 use App\Models\Document;
+use App\Models\Laboratory;
+use App\Models\Patient;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -35,12 +38,13 @@ class HomeController extends Controller
 
         $now = Carbon::now();
         $user = User::where('id',Auth::user()->id)->first();
-        $years = Document::where('user_id',$user->id)
+        $patient = Patient::where('user_id', $user->id)->first();
+        $years = Document::where('patient_id',$patient->id)
                                    ->selectRaw('YEAR(created_at) year')
                                    ->groupBy('year')
                                    ->get()->reverse();
 
-        $recent_year = Document::where('user_id',$user->id)
+        $recent_year = Document::where('patient_id',$patient->id)
                                 ->selectRaw('YEAR(created_at) year')
                                 ->groupBy('year')
                                 ->latest()
@@ -52,12 +56,12 @@ class HomeController extends Controller
             $recent_year = '0'; 
         }
 
-        $documents = Document::where('user_id',$user->id)
+        $documents = Document::where('patient_id',$patient->id)
                                    ->whereYear('created_at',$recent_year)
                                    ->selectRaw('MONTHNAME(created_at) month')
                                    ->selectRaw('analyse')
                                    ->selectRaw('document_name')
-                                   ->selectRaw('etat')
+                                   ->selectRaw('flag_etat')
                                    ->selectRaw('created_at')
                                    ->get();
 
@@ -68,7 +72,7 @@ class HomeController extends Controller
 
 
 
-        $monthDocuments = Document::where('user_id',$user->id)
+        $monthDocuments = Document::where('patient_id',$patient->id)
                                    ->selectRaw('created_at')
                                    ->selectRaw('MONTH(created_at) month')
                                    ->selectRaw('YEAR(created_at) year')
@@ -76,7 +80,7 @@ class HomeController extends Controller
                                    ->groupBy('year')
                                    ->get();
 
-        return view('patient.dashboard-patient',compact('user','years','recent_year','documents'));
+        return view('patient.dashboard-patient',compact('patient','user','years','recent_year','documents'));
     }
 
 
@@ -84,20 +88,22 @@ class HomeController extends Controller
 
         $now = Carbon::now();
         $user = User::where('id',Auth::user()->id)->first();
-        $years = Document::where('user_id',$user->id)
+        $patient = Patient::where('user_id', $user->id)->first();
+        $years = Document::where('patient_id',$patient->id)
                                    ->selectRaw('YEAR(created_at) year')
                                    ->groupBy('year')
                                    ->get()->reverse();
 
         $recent_year = $year;
       
-        $documents = Document::where('user_id',$user->id)
+        $documents = Document::where('patient_id',$patient->id)
                                 ->whereYear('created_at',$year)
                                 ->selectRaw('MONTHNAME(created_at) month')
                                 ->selectRaw('analyse')
                                 ->selectRaw('document_name')
-                                ->selectRaw('etat')
+                                ->selectRaw('flag_etat')
                                 ->selectRaw('created_at')
+                                ->selectRaw('id')
                                 ->get();
 
         $documents = collect($documents)
@@ -105,17 +111,75 @@ class HomeController extends Controller
 
         $keys = $documents->keys();
        
-        return view('patient.dashboard-patient',compact('user','years','recent_year','documents'));
+        return view('patient.dashboard-patient',compact('patient','user','years','recent_year','documents'));
     }
 
 
 
     public function document($month , $year){
         $user = User::where('id',Auth::user()->id)->first();
-        $document = Document::where('user_id',$user->id)
+        $patient = Patient::where('user_id', $user->id)->first();
+        $document = Document::where('patient_id',$patient->id)
                                ->whereYear('created_at', $year)
                                ->whereMonth('created_at', $month)
                                ->get();
         return $document;
+    }
+
+    public function detaildocument($id){
+        $document = Document::find($id);
+        $patient = Patient::where('id',$document->patient_id)->first();
+        $detaildocuments = Detaildocument::where('document_id',$id)->get();
+        return view('patient.modal-detaildocument',compact('detaildocuments','patient','document'));
+    }
+
+
+    public function labo(){
+        $user = User::where('id',Auth::user()->id)->first();
+        $labo = Laboratory::where('user_id', $user->id)->first();
+        $labos = Document::where('laboratory_id',$labo->id)
+                                   ->selectRaw('laboratory_destination_id')
+                                   ->groupBy('laboratory_destination_id')
+                                   ->get();
+
+        $recent_labo = Document::where('laboratory_id',$labo->id)
+                                   ->selectRaw('laboratory_destination_id')
+                                   ->groupBy('laboratory_destination_id')
+                                   ->first();
+                                   
+        
+        $documents = Document::where('laboratory_id',$labo->id)
+                                   ->where('laboratory_destination_id',$recent_labo->laboratory_destination_id)
+                                   ->selectRaw('MONTHNAME(created_at) month')
+                                   ->selectRaw('analyse')
+                                   ->selectRaw('document_name')
+                                   ->selectRaw('flag_etat')
+                                   ->selectRaw('created_at')
+                                   ->selectRaw('patient_id')
+                                   ->get();
+
+                                  
+        return view('labo.dashboard-labo',compact('labos','documents'));
+    }
+
+    public function documentWithLabo($id){
+
+        $user = User::where('id',Auth::user()->id)->first();
+        $labo = Laboratory::where('user_id', $user->id)->first();
+        $labos = Document::where('laboratory_id',$labo->id)
+                                ->selectRaw('laboratory_destination_id')
+                                ->groupBy('laboratory_destination_id')
+                                ->get();
+        $documents = Document::where('laboratory_id',$labo->id)
+                                    ->where('laboratory_destination_id',$id)
+                                    ->selectRaw('analyse')
+                                    ->selectRaw('document_name')
+                                    ->selectRaw('flag_etat')
+                                    ->selectRaw('created_at')
+                                    ->selectRaw('patient_id')
+                                    ->get();
+
+       
+        return view('labo.dashboard-labo',compact('labos','documents'));
     }
 }

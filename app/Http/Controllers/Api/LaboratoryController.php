@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Patient;
+use App\Models\Laboratory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class PatientController extends Controller
+class LaboratoryController extends Controller
 {
     public function __construct()
     {
@@ -33,35 +33,27 @@ class PatientController extends Controller
     public function store(Request $request)
     {
         //
-            $user = User::where('username',$request->username)->first();
-            if($user){
-                return "exist";
-            }
-            $user = User::where('email',$request->email)->first();
-            if($user){
-                return "exist";
-            }
+        $user = new User();
+        $user->username = $request->username;
+        $user->password = Hash::make($request['password']);
+        $user->type = $request->type;
+        $user->save();
         
-            $user = new User();
-            $user->username = $request->username;
-            $user->password = Hash::make($request['password']);
-            $user->type = $request->type;
-            $user->save();
-
-            $patient = new Patient();
-            $patient->user_id = $user->id;
-            $patient->first_name = $request->first_name;
-            $patient->last_name = $request->last_name;
-            $patient->laboratory_id = $request->laboratory_id;
-            $patient->id_logiciel = $request->id_logiciel;
-            $patient->email = $request->email;
-            $patient->phone = $request->phone;
-            $patient->date_birth = $request->date_birth;
-            $patient->flag_etat = $request->flag_etat;
-            $patient->sexe = $request->sexe;
-            $patient->save();
-            return $patient;
-        
+        $labo = new Laboratory();
+        $labo->user_id = $user->id;
+        $labo->designation = $request->designation;
+        $labo->description = $request->description;
+        $labo->id_logiciel = $request->id_logiciel;
+        $labo->phone = $request->phone;
+        $labo->phone_fixe = $request->phone_fixe;
+        $labo->email = $request->email;
+        $labo->adresse = $request->adresse;
+        $labo->primary_color = $request->primary_color;
+        $labo->secondary_color = $request->secondary_color;
+        $labo->flag_etat = $request->flag_etat;
+        $labo->save();
+        return $labo;
+    
     }
 
     /**

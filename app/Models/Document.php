@@ -47,4 +47,18 @@ class Document extends Model
             return 'Décembre';
         }
     }
+    public function Laboratory(){
+        return $this->belongsTo(Laboratory::class,'laboratory_id');
+    }
+
+    public function getLabo(){
+        $labo = null;
+        $labo= Laboratory::where('id',$this->laboratory_destination_id)->first();
+        return $labo;
+    }
+    public function getPatient(){
+        $patient = null;
+        $patient= Patient::where('id',$this->patient_id)->first();
+        return $patient;
+    }
 }

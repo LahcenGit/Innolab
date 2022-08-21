@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\PatientController;
 use App\Http\Controllers\Api\DocumentController;
+use App\Http\Controllers\Api\LaboratoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,8 +22,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('/patient',PatientController::class);
+Route::apiResource('/labo',LaboratoryController::class);
 Route::apiResource('/document',DocumentController::class);
 Route::post('/document/update', [App\Http\Controllers\DocumentController::class,'updateDocument']);
+Route::post('/login', [App\Http\Controllers\Api\ApiAuthController::class,'login']);
+
 
 
 

@@ -31,6 +31,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/dashboard-patient',[App\Http\Controllers\HomeController::class,'patient']);
+Route::get('/dashboard-labo',[App\Http\Controllers\HomeController::class,'labo']);
 //->middleware('can:dashboard.patient');
 Route::resource('/dashboard-patient/profil',ProfilController::class)->middleware('can:dashboard.patient');
 Route::get('/dashboard-patient/{year}', [App\Http\Controllers\HomeController::class, 'patientWithYear'])->middleware('can:dashboard.patient');
@@ -39,5 +40,6 @@ Route::get('/dashboard-patient/{year}', [App\Http\Controllers\HomeController::cl
 Route::get('/consultation/{name}', [App\Http\Controllers\ConsultationController::class, 'showConsultation']);
 Route::get('/consultation-pdf/{name}', [App\Http\Controllers\ConsultationController::class, 'showPdf']);
 Route::get('/consultation-detail/{month}/{year}', [App\Http\Controllers\HomeController::class, 'document']);
-
+Route::get('/dashboard-labo/{id}', [App\Http\Controllers\HomeController::class, 'documentWithLabo']);
+Route::get('detail-document/{id}', [App\Http\Controllers\HomeController::class, 'detaildocument']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
