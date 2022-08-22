@@ -75,8 +75,8 @@
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
                                     <img src="{{asset('Dashboard/images/profile/pic1.jpg')}}" width="20" alt=""/>
 									<div class="header-info">
-										<span>Bonjour, <strong>{{Auth::user()->prenom}}</strong></span>
-										<small>Patient Profile</small>
+										<span>Bonjour, <strong>{{Auth::user()->username}}</strong></span>
+										<small>Laboratoire Profile</small>
 									</div>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">

@@ -29,7 +29,7 @@
 					</div>
 					<div class="card-body">
 							@foreach ($labos as $labo)
-							<a href="{{asset('/dashboard-labo/'.$labo->laboratory_destination_id)}}" class="btn btn-outline-primary m-1" style="width: 100%">{{$labo->getLabo()->designation}}</a>
+							<a href="{{asset('/dashboard-labo/'.$labo->laboratory_id)}}" class="btn btn-outline-primary m-1" style="width: 100%">@if($documents != null){{$labo->getLabo()->designation}}@endif</a>
 							@endforeach
 			
 					</div>
@@ -43,34 +43,42 @@
 					</div>
 
 					<div class="card-body">
-						<div class="card-body">
-                                    <div class="table-responsive">
-                                        <table id="example3" class="display" style="min-width: 845px">
-                                            <thead>
-                                               
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Patient</th>
-                                                    <th>Analyse</th>
-                                                    <th>Etat</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($documents as $document)
-                                              <tr >
-                                            
+                        @if($documents == null)
+					     <p>Aucun document disponible</p>
+                        @else
+                        <div class="table-responsive">
+                             <table id="example3" class="display" style="min-width: 845px">
+                                 <thead>
+                                       <tr>
+                                        <th>#</th>
+                                        <th>Patient</th>
+                                        <th>Analyse</th>
+                                        <th>Etat</th>
+                                        </tr>
+                                </thead>
+                                    <tbody>
+                                        @foreach($documents as $document)
+                                            <tr >
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>{{$document->getPatient()->first_name}} {{$document->getPatient()->last_name}}</td>
                                                 <td>{{$document->analyse}}</td>
-                                                <td>{{$document->flag_etat}}</td>
-                                                
+                                                <td>
+                                                @if($document->flag_etat == 0)
+                                                <span class="badge badge-warning">En attente</span>
+                                                @else
+                                                <span class="badge badge-success">Prét</span>
+                                        
+                                                @endif
+                                                </td>
                                                 <td></td>
+                                                <td></td>
+                                            
                                             </tr>
-                                            @endforeach
-                                        </tbody>
+                                        @endforeach
+                                    </tbody>
                                         </table>
                                     </div>
+                                @endif
                               </div>
 					</div>
 				</div>
@@ -79,9 +87,7 @@
 		</div>
 	</div>
 </div>
-<div id="modal-detaildocument">
 
-</div>
 @endsection
 
 @push('consultation-detail')

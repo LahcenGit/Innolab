@@ -63,6 +63,7 @@ class HomeController extends Controller
                                    ->selectRaw('document_name')
                                    ->selectRaw('flag_etat')
                                    ->selectRaw('created_at')
+                                   ->selectRaw('id')
                                    ->get();
 
        $documents = collect($documents)
@@ -137,41 +138,49 @@ class HomeController extends Controller
     public function labo(){
         $user = User::where('id',Auth::user()->id)->first();
         $labo = Laboratory::where('user_id', $user->id)->first();
-        $labos = Document::where('laboratory_id',$labo->id)
-                                   ->selectRaw('laboratory_destination_id')
-                                   ->groupBy('laboratory_destination_id')
+        $labos = Document::where('laboratory_destination_id',$labo->id)
+                                   ->where('laboratory_destination_id','!=', NULL)
+                                   ->selectRaw('laboratory_id')
+                                   ->groupBy('laboratory_id')
                                    ->get();
 
-        $recent_labo = Document::where('laboratory_id',$labo->id)
-                                   ->selectRaw('laboratory_destination_id')
-                                   ->groupBy('laboratory_destination_id')
+        $recent_labo = Document::where('laboratory_destination_id',$labo->id)
+                                   ->where('laboratory_destination_id','!=', NULL)
+                                   ->selectRaw('laboratory_id')
+                                   ->groupBy('laboratory_id')
                                    ->first();
                                    
-        
-        $documents = Document::where('laboratory_id',$labo->id)
-                                   ->where('laboratory_destination_id',$recent_labo->laboratory_destination_id)
-                                   ->selectRaw('MONTHNAME(created_at) month')
-                                   ->selectRaw('analyse')
-                                   ->selectRaw('document_name')
-                                   ->selectRaw('flag_etat')
-                                   ->selectRaw('created_at')
-                                   ->selectRaw('patient_id')
-                                   ->get();
-
-                                  
+        if($recent_labo){
+            $documents = Document::where('laboratory_destination_id',$labo->id)
+                                    ->where('laboratory_id',$recent_labo->laboratory_id)
+                                    ->selectRaw('MONTHNAME(created_at) month')
+                                    ->selectRaw('analyse')
+                                    ->selectRaw('document_name')
+                                    ->selectRaw('flag_etat')
+                                    ->selectRaw('created_at')
+                                    ->selectRaw('patient_id')
+                                    ->get();
+           
+        }
+       
+        else{
+            $documents = null;
+        }                      
         return view('labo.dashboard-labo',compact('labos','documents'));
+      
     }
 
-    public function documentWithLabo($id){
+    public function LabotWithDocument($id){
 
         $user = User::where('id',Auth::user()->id)->first();
         $labo = Laboratory::where('user_id', $user->id)->first();
-        $labos = Document::where('laboratory_id',$labo->id)
-                                ->selectRaw('laboratory_destination_id')
-                                ->groupBy('laboratory_destination_id')
+        $labos = Document::where('laboratory_destination_id',$labo->id)
+                                ->where('laboratory_destination_id','!=', NULL)
+                                ->selectRaw('laboratory_id')
+                                ->groupBy('laboratory_id')
                                 ->get();
-        $documents = Document::where('laboratory_id',$labo->id)
-                                    ->where('laboratory_destination_id',$id)
+        $documents = Document::where('laboratory_destination_id',$labo->id)
+                                    ->where('laboratory_id',$id)
                                     ->selectRaw('analyse')
                                     ->selectRaw('document_name')
                                     ->selectRaw('flag_etat')
@@ -179,7 +188,12 @@ class HomeController extends Controller
                                     ->selectRaw('patient_id')
                                     ->get();
 
-       
-        return view('labo.dashboard-labo',compact('labos','documents'));
+        if($labos){
+            $test = 1;
+        }
+        else{
+            $test = 0;
+        }
+        return view('labo.dashboard-labo',compact('labos','documents','test'));
     }
 }

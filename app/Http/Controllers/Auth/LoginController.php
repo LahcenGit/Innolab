@@ -50,7 +50,13 @@ class LoginController extends Controller
         
         if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']),$remember_me))
         {
-            return redirect('dashboard-patient');
+            if(auth::user()->type == 'patient'){
+                return redirect('dashboard-patient');
+            }
+            else{
+                return redirect('dashboard-labo');
+            }
+            
         }
         else{
             return redirect()->route('login')

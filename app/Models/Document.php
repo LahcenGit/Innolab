@@ -53,7 +53,7 @@ class Document extends Model
 
     public function getLabo(){
         $labo = null;
-        $labo= Laboratory::where('id',$this->laboratory_destination_id)->first();
+        $labo= Laboratory::where('id',$this->laboratory_id)->first();
         return $labo;
     }
     public function getPatient(){
