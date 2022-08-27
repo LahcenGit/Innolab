@@ -77,6 +77,20 @@ class LaboratoryController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $labo = Laboratory::find($id);
+        $labo->designation = $request->designation;
+        $labo->description = $request->description;
+        $labo->id_logiciel = $request->id_logiciel;
+        $labo->phone = $request->phone;
+        $labo->phone_fixe = $request->phone_fixe;
+        $labo->email = $request->email;
+        $labo->adresse = $request->adresse;
+        $labo->primary_color = $request->primary_color;
+        $labo->secondary_color = $request->secondary_color;
+        $labo->flag_etat = $request->flag_etat;
+        $labo->save();
+        return $labo;
+        
     }
 
     /**
@@ -88,5 +102,8 @@ class LaboratoryController extends Controller
     public function destroy($id)
     {
         //
+        $labo = Laboratory::find($id);
+        $labo->delete();
+        return true;
     }
 }

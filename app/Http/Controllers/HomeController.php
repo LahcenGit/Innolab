@@ -160,13 +160,24 @@ class HomeController extends Controller
                                     ->selectRaw('created_at')
                                     ->selectRaw('patient_id')
                                     ->get();
-           
+            $document_en_attente = Document::where('laboratory_destination_id',$labo->id)
+                                    ->where('flag_etat',0)
+                                    ->count();
+            $document_pret = Document::where('laboratory_destination_id',$labo->id)
+                                     ->where('flag_etat',1)
+                                     ->count();
+            $total = $document_en_attente + $document_pret;
         }
        
         else{
             $documents = null;
-        }                      
-        return view('labo.dashboard-labo',compact('labos','documents'));
+            $document_en_attente = 0;
+            $document_pret =0;
+            $total = 0;
+        } 
+        
+       
+        return view('labo.dashboard-labo',compact('labos','documents','document_en_attente','document_pret','total'));
       
     }
 
@@ -188,12 +199,13 @@ class HomeController extends Controller
                                     ->selectRaw('patient_id')
                                     ->get();
 
-        if($labos){
-            $test = 1;
-        }
-        else{
-            $test = 0;
-        }
-        return view('labo.dashboard-labo',compact('labos','documents','test'));
+        $document_en_attente = Document::where('laboratory_destination_id',$labo->id)
+                                        ->where('flag_etat',0)
+                                        ->count();
+        $document_pret = Document::where('laboratory_destination_id',$labo->id)
+                                     ->where('flag_etat',1)
+                                     ->count();
+        $total = $document_en_attente + $document_pret;
+        return view('labo.dashboard-labo',compact('labos','documents','document_en_attente','document_pret','total'));
     }
 }

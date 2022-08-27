@@ -7,20 +7,19 @@
 
 	<div class="container">
 		<div class="row page-titles mx-0">
-			<div class="col-sm-6 p-md-0">
-				<div class="welcome-text">
-					<h4> </h4>
-					<span> </span>
-				</div>
-			</div>
-			<div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+      <div class="col-sm-6 p-md-0">
+       <div class="welcome-text">
+         <p> Documents En Attentes : &nbsp;  &nbsp; <b>{{$document_en_attente}}</b><br>Documents Prêts :&nbsp;  &nbsp;<b>{{$document_pret}}</b><br>Total :&nbsp;  &nbsp;<b>{{$total}}</b></p>
+       </div>
+      </div>
+      <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-					<li class="breadcrumb-item active"><a href="javascript:void(0)">comptes rendus</a></li>
+					<li class="breadcrumb-item"><a href="{{url('dashboard-labo')}}">Dashboard</a></li>
+					<li class="breadcrumb-item active"><a href="javascript:void(0)">Les documents</a></li>
 				</ol>
 			</div>
 		</div>
-
+     
 		<div class="row mt-2 mx-0">
 			<div class="col-md-3 p-md-1 ">
 				<div class="card ">
@@ -39,51 +38,51 @@
 			<div class="col-md-9 p-md-1">
 				<div class="card ">
 					<div class="card-header">
-						<h4 class="card-title">Compte rendu  <a href="#" class="badge badge-primary"> </a></h4>
+						<h4 class="card-title">Les documents</h4>
 					</div>
 
 					<div class="card-body">
-                        @if($documents == null)
+              @if($documents == null)
 					     <p>Aucun document disponible</p>
-                        @else
-                        <div class="table-responsive">
-                             <table id="example3" class="display" style="min-width: 845px">
-                                 <thead>
-                                       <tr>
-                                        <th>#</th>
-                                        <th>Patient</th>
-                                        <th>Analyse</th>
-                                        <th>Etat</th>
-                                        </tr>
-                                </thead>
-                                    <tbody>
-                                        @foreach($documents as $document)
-                                            <tr >
-                                                <td>{{$loop->iteration}}</td>
-                                                <td>{{$document->getPatient()->first_name}} {{$document->getPatient()->last_name}}</td>
-                                                <td>{{$document->analyse}}</td>
-                                                <td>
-                                                @if($document->flag_etat == 0)
-                                                <span class="badge badge-warning">En attente</span>
-                                                @else
-                                                <span class="badge badge-success">Prét</span>
-                                        
-                                                @endif
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                            
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                        </table>
-                                    </div>
-                                @endif
-                              </div>
+               @else
+                  <div class="table-responsive">
+                        <table id="example3" class="display" style="min-width: 845px">
+                            <thead>
+                                  <tr>
+                                  <th>#</th>
+                                  <th>Patient</th>
+                                  <th>Analyse</th>
+                                  <th>Etat</th>
+                                  <th>Action</th>
+                                  </tr>
+                             </thead>
+                              <tbody>
+                                @foreach($documents as $document)
+                                    <tr >
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{$document->getPatient()->first_name}} {{$document->getPatient()->last_name}}</td>
+                                        <td>{{$document->analyse}}</td>
+                                       @if($document->flag_etat == 0)
+                                        <td>
+                                        <span class="badge badge-warning">En attente</span>
+                                        </td>
+                                        <td>--------</td>
+                                        @else
+                                        <td>
+                                        <span class="badge badge-primary">Prêt</span>
+                                        </td>
+                                        <td> <a href="{{asset('files/'.$document->document_name.'.pdf')}}"  class="btn btn-primary shadow btn-xs sharp mr-1"><i class=" fa-solid fa-file-lines fa-xl"></i></a></td>
+                                        @endif
+                                     </tr>
+                                @endforeach
+                                </tbody>
+                          </table>
+                    </div>
+                 @endif
+            </div>
 					</div>
 				</div>
 			</div>
-			
 		</div>
 	</div>
 </div>

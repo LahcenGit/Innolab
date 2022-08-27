@@ -85,6 +85,19 @@ class PatientController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $patient = Patient::find($id);
+        $patient->first_name = $request->first_name;
+        $patient->last_name = $request->last_name;
+        $patient->laboratory_id = $request->laboratory_id;
+        $patient->id_logiciel = $request->id_logiciel;
+        $patient->email = $request->email;
+        $patient->phone = $request->phone;
+        $patient->date_birth = $request->date_birth;
+        $patient->flag_etat = $request->flag_etat;
+        $patient->sexe = $request->sexe;
+        $patient->save();
+        return $patient;
+
     }
 
     /**
@@ -96,5 +109,8 @@ class PatientController extends Controller
     public function destroy($id)
     {
         //
+        $patient = Patient::find($id);
+        $patient->delete();
+        return true;
     }
 }

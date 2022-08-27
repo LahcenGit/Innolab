@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Document extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'id',
+        
+    ];
     public function monthTranslate(){
         if($this->month == 'January'){
             return 'Janvier';
