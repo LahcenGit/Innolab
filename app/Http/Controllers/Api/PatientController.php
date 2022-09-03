@@ -82,10 +82,10 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_logiciel)
     {
         //
-        $patient = Patient::find($id);
+        $patient = Patient::where('id_logiciel',$id_logiciel)->first();
         $patient->first_name = $request->first_name;
         $patient->last_name = $request->last_name;
         $patient->laboratory_id = $request->laboratory_id;
@@ -97,7 +97,6 @@ class PatientController extends Controller
         $patient->sexe = $request->sexe;
         $patient->save();
         return $patient;
-
     }
 
     /**
@@ -106,10 +105,12 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_logiciel)
     {
         //
-        $patient = Patient::find($id);
+        $patient = Patient::where('id_logiciel',$id_logiciel)->first();
+        $user = User::where('id',$patient->user_id)->first();
+        $user->delete();
         $patient->delete();
         return true;
     }

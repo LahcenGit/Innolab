@@ -74,10 +74,10 @@ class LaboratoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_logiciel)
     {
         //
-        $labo = Laboratory::find($id);
+        $labo = Laboratory::find($id_logiciel);
         $labo->designation = $request->designation;
         $labo->description = $request->description;
         $labo->id_logiciel = $request->id_logiciel;
@@ -99,10 +99,10 @@ class LaboratoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_logiciel)
     {
         //
-        $labo = Laboratory::find($id);
+        $labo = Laboratory::find($id_logiciel);
         $labo->delete();
         return true;
     }

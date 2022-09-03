@@ -41,6 +41,7 @@ class DocumentController extends Controller
         $document->patient_id = $patient->id;
         $document->laboratory_id = $request->laboratory_id;
         $document->laboratory_destination_id = $request->laboratory_destination_id;
+        $document->id_logiciel= $request->id_logiciel;
         $document->document_name = $request->document_name;
         $document->analyse = $request->analyse;
         $document->flag_etat = $request->flag_etat;
@@ -77,19 +78,19 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request , $id)
+    public function update(Request $request , $id_logiciel)
     {       
-            $document = Document::find($id);
-            $patient = Patient::where('id_logiciel',$request->id_logiciel)->first();
-            $document->patient_id = $patient->id;
-            $document->laboratory_id = $request->laboratory_id;
-            $document->laboratory_destination_id = $request->laboratory_destination_id;
-            $document->document_name = $request->document_name;
-            $document->analyse = $request->analyse;
-            $document->flag_etat = $request->flag_etat;
-            $document->date = $request->date;
-            $document->save();
-            return $document;
+        $document = Document::find($id_logiciel);
+        $patient = Patient::where('id_logiciel',$id_logiciel)->first();
+        $document->patient_id = $patient->id;
+        $document->laboratory_id = $request->laboratory_id;
+        $document->laboratory_destination_id = $request->laboratory_destination_id;
+        $document->document_name = $request->document_name;
+        $document->analyse = $request->analyse;
+        $document->flag_etat = $request->flag_etat;
+        $document->date = $request->date;
+        $document->save();
+        return $document;
     }
     /**
      * Remove the specified resource from storage.
@@ -97,9 +98,9 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_logiciel)
     {
-        $document = Document::find($id);
+        $document = Document::find($id_logiciel);
         $document->delete();
         return true;
     }

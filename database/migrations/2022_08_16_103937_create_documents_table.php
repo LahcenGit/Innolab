@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('laboratory_destination_id')->nullable();
             $table->unsignedBigInteger('doctor_id')->nullable();
             $table->unsignedBigInteger('patient_id')->nullable();
+            $table->bigInteger('id_logiciel');
             $table->string('document_name');
             $table->string('analyse');
             $table->tinyInteger('flag_etat')->nullable();
