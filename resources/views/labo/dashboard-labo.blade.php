@@ -66,7 +66,7 @@
                                         <td>
                                         <span class="badge badge-warning">En attente</span>
                                         </td>
-                                        <td>--------</td>
+                                        <td><strong><i class="fa fa-minus"></i></strong></td>
                                         @else
                                         <td>
                                         <span class="badge badge-primary">Prêt</span>
@@ -89,67 +89,3 @@
 
 @endsection
 
-@push('consultation-detail')
-<script>
-  $.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
-
-$(".checkmonth").on('click',function() {
-   
-	var month = $(this).attr("month");
-    var year = $(this).attr("year");
-	var data ="";
-  $.ajax({
-    url: '/consultation-detail/'+month+'/'+year,
-    type: "GET",
-    success: function (res) {
-		$.each(res, function(i, res) {
-			if(res.flag_etat == 0){
-				line = '<label class="mb-1"><strong>Etat : </strong> En cours...</label>  <i style="color:#0089c8" class="ml-2 fa fa-circle"></i> <br>'
-			}
-			if(res.flag_etat == 1){
-				line = '<label class="mb-1"><strong>Etat : </strong> Attendre le paiement</label>  <i style="color:#e78c03" class="ml-2 fa fa-circle"></i> <br>'
-			}
-			else{
-				line = '<label class="mb-1"><strong>Etat : </strong> Payé</label>  <i style="color:#00c855" class="ml-2 fa fa-circle"></i> <br>'+
-						'<div class="center" style="text-align: center;">'+
-						'<a href="" class="btn btn-primary btn-block mt-4" style="background-color: #0083CC; border-color: #0083CC; padding-top:12px;" >Affichier le Resultat <i class="ml-2 fa-solid fa-file-lines fa-xl"></i> </a>'+
-					   '</div>'
-			}
-            data = 
-			''
-		});
-		$('#myTabContent').html(data);
-    }
-  });
-  
-});
-</script>
-@endpush
-
-@push('modal-detaildocument-scripts')
-<script>
-  $.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
-$(".detail-document").click(function() {
-  
-  var id = $(this).data('id');
- 
-  $.ajax({
-    url: '/detail-document/'+id ,
-    type: "GET",
-    success: function (res) {
-      $('#modal-detaildocument').html(res);
-      $("#exampleModal").modal('show');
-    }
-  });
-  
-});
-</script>
-@endpush

@@ -8,9 +8,9 @@ use App\Models\Document;
 use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Api\BaseController as BaseController;
 
-
-class DocumentController extends Controller
+class DocumentController extends BaseController
 {
     public function __construct()
     {
@@ -56,8 +56,9 @@ class DocumentController extends Controller
         $detaildocument->norme = $request->norme[$i];
         $detaildocument->flag = $request->flag[$i];
         $detaildocument->save();
-        return $document;
+       
         }
+        return $this->sendResponse($document, 'Document was successfully created.');
     }
 
     /**
@@ -90,7 +91,7 @@ class DocumentController extends Controller
         $document->flag_etat = $request->flag_etat;
         $document->date = $request->date;
         $document->save();
-        return $document;
+        return $this->sendResponse($document, 'Document was successfully updated.');
     }
     /**
      * Remove the specified resource from storage.
@@ -102,6 +103,6 @@ class DocumentController extends Controller
     {
         $document = Document::find($id_logiciel);
         $document->delete();
-        return true;
+        return $this->sendResponse($document, 'Document was successfully deleted.');
     }
 }

@@ -7,8 +7,9 @@ use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Api\BaseController as BaseController;
 
-class PatientController extends Controller
+class PatientController extends BaseController
 {
     public function __construct()
     {
@@ -60,7 +61,7 @@ class PatientController extends Controller
             $patient->flag_etat = $request->flag_etat;
             $patient->sexe = $request->sexe;
             $patient->save();
-            return $patient;
+            return $this->sendResponse($patient, 'Patient was successfully created.');
         
     }
 
@@ -96,7 +97,7 @@ class PatientController extends Controller
         $patient->flag_etat = $request->flag_etat;
         $patient->sexe = $request->sexe;
         $patient->save();
-        return $patient;
+        return $this->sendResponse($patient, 'Patient was successfully updated.');
     }
 
     /**
@@ -112,6 +113,6 @@ class PatientController extends Controller
         $user = User::where('id',$patient->user_id)->first();
         $user->delete();
         $patient->delete();
-        return true;
+        return $this->sendResponse($patient, 'Patient was successfully deleted.');
     }
 }

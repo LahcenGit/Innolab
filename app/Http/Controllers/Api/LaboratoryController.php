@@ -7,8 +7,9 @@ use App\Models\Laboratory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Api\BaseController as BaseController;
 
-class LaboratoryController extends Controller
+class LaboratoryController extends BaseController
 {
     public function __construct()
     {
@@ -52,9 +53,8 @@ class LaboratoryController extends Controller
         $labo->secondary_color = $request->secondary_color;
         $labo->flag_etat = $request->flag_etat;
         $labo->save();
-        return $labo;
-    
-    }
+         return $this->sendResponse($labo, 'laboratory was successfully created.');
+   }
 
     /**
      * Display the specified resource.
@@ -89,7 +89,7 @@ class LaboratoryController extends Controller
         $labo->secondary_color = $request->secondary_color;
         $labo->flag_etat = $request->flag_etat;
         $labo->save();
-        return $labo;
+        return $this->sendResponse($labo, 'Laboratory was successfully updated.');
         
     }
 
@@ -100,10 +100,9 @@ class LaboratoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id_logiciel)
-    {
-        //
+   {   
         $labo = Laboratory::find($id_logiciel);
         $labo->delete();
-        return true;
+        return $this->sendResponse($labo, 'Laboratory was successfully deleted.');
     }
 }
