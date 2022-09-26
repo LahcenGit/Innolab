@@ -8,19 +8,23 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use App\Http\Resources\UserResource;
+use Validator;
+use App\Http\Controllers\Api\BaseController as BaseController;
 
-class ApiAuthController extends Controller
+class ApiAuthController extends BaseController
 {
     //
     public function login(AuthRequest $request){
 
         $user = User::where('email',$request->email)->first();
+
         if(! $user || ! Hash::check($request->password, $user->password)){
-            throw ValidationException::withMessages([
-            'email' => ['The provided  credential are incorrect.'],
-            ]);
+            return $this->sendError('Incorrect Data'); 
         }
-        return $user->createToken($request->email)->plainTextToken;
+
+        $data['token'] =  $user->createToken($request->email)->plainTextToken;
+        return $this->sendResponse($data, 'User login successfully.');
     }
     
 }

@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('/patient',PatientController::class);
-Route::apiResource('/labo',LaboratoryController::class);
+Route::middleware('auth:sanctum')->apiResource('/labo',LaboratoryController::class);
 Route::apiResource('/document',DocumentController::class);
 Route::post('/document/update', [App\Http\Controllers\DocumentController::class,'updateDocument']);
 Route::post('/login', [App\Http\Controllers\Api\ApiAuthController::class,'login']);
