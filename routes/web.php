@@ -18,18 +18,24 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
 
     if(Auth::guest()){
-        return redirect('/login');
+        return view('/welcome');
+    }
+    else if(Auth::user()->type == 'labo'){
+        return redirect('/dashboard-labo');
     }
     else{
         return redirect('/dashboard-patient');
     }
- 
 });
 
 
 
 
-Auth::routes();
+
+Auth::routes([
+    'register' => false,
+    
+]);
 Route::get('/dashboard-patient',[App\Http\Controllers\HomeController::class,'patient'])->middleware('can:dashboard.patient');
 Route::get('/dashboard-labo',[App\Http\Controllers\HomeController::class,'labo'])->middleware('can:dashboard.labo');
 Route::get('/dashboard-labo/{id}', [App\Http\Controllers\HomeController::class, 'LabotWithDocument'])->middleware('can:dashboard.labo');
