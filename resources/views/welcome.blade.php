@@ -112,10 +112,18 @@
                             </div>
                         </div>
         
-                       
+                        <div class="form-row d-flex justify-content-between mt-4 mb-2">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox ml-1">
+                                            <input class="form-check-input" type="checkbox" name="remember_me" value="1" id="basic_checkbox_1">
+                                            <label class="custom-control-label" for="basic_checkbox_1">Se souvenir de moi</label>
+                                        </div>
+                                    </div>
+                                            
+                                </div>
         
                         <div class="align-items-center d-flex">
-                          <button type="submite" class="btn btn-primary btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                          <button type="submit" class="btn btn-primary btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
                             <span>Connectez-vous</span>
                             <i class="bi bi-arrow-right"></i>
                          </button>
@@ -189,7 +197,7 @@
           </div>
 
           <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" class="php-email-form">
+            <form action="{{asset('/contact')}}" method="post" class="php-email-form">
               <div class="row gy-4">
 
                 <div class="col-md-6">

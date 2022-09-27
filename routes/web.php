@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -48,3 +49,4 @@ Route::get('/consultation-pdf/{name}', [App\Http\Controllers\ConsultationControl
 Route::get('/consultation-detail/{month}/{year}', [App\Http\Controllers\HomeController::class, 'document']);
 Route::get('detail-document/{id}', [App\Http\Controllers\HomeController::class, 'detaildocument']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('/contact',ContactController::class);
