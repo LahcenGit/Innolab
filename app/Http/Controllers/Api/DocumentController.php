@@ -47,17 +47,16 @@ class DocumentController extends BaseController
         $document->flag_etat = $request->flag_etat;
         $document->date = $request->date;
         $document->save();
-        for($i = 0 ; $i<count($request->rubrique) ; $i++){
+
         $detaildocument = new Detaildocument();
         $detaildocument->document_id = $document->id;
-        $detaildocument->rubrique = $request->rubrique[$i];
-        $detaildocument->value = $request->value[$i];
-        $detaildocument->unite = $request->unite[$i];
-        $detaildocument->norme = $request->norme[$i];
-        $detaildocument->flag = $request->flag[$i];
+        $detaildocument->rubrique = $request->rubrique;
+        $detaildocument->value = $request->value;
+        $detaildocument->unite = $request->unite;
+        $detaildocument->norme = $request->norme;
+        $detaildocument->flag = $request->flag;
         $detaildocument->save();
        
-        }
         return $this->sendResponse($document, 'Document was successfully created.');
     }
 

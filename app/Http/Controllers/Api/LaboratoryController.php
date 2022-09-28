@@ -37,7 +37,7 @@ class LaboratoryController extends BaseController
         $user = new User();
         $user->username = $request->username;
         $user->password = Hash::make($request['password']);
-        $user->type = $request->type;
+        $user->type = 'labo';
         $user->save();
         
         $labo = new Laboratory();

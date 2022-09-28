@@ -136,6 +136,7 @@ class HomeController extends Controller
 
 
     public function labo(){
+        $id=null;
         $user = User::where('id',Auth::user()->id)->first();
         $labo = Laboratory::where('user_id', $user->id)->first();
         $labos = Document::where('laboratory_destination_id',$labo->id)
@@ -177,12 +178,13 @@ class HomeController extends Controller
         } 
         
        
-        return view('labo.dashboard-labo',compact('labos','documents','document_en_attente','document_pret','total'));
+        return view('labo.dashboard-labo',compact('labos','documents','document_en_attente','document_pret','total','labo','id'));
       
     }
 
     public function LabotWithDocument($id){
 
+        $id = $id;
         $user = User::where('id',Auth::user()->id)->first();
         $labo = Laboratory::where('user_id', $user->id)->first();
         $labos = Document::where('laboratory_destination_id',$labo->id)
@@ -206,6 +208,6 @@ class HomeController extends Controller
                                      ->where('flag_etat',1)
                                      ->count();
         $total = $document_en_attente + $document_pret;
-        return view('labo.dashboard-labo',compact('labos','documents','document_en_attente','document_pret','total'));
+        return view('labo.dashboard-labo',compact('labos','documents','document_en_attente','document_pret','total','id'));
     }
 }

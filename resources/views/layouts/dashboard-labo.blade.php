@@ -5,10 +5,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Laboratoire Abi-Ayad </title>
+    <title>Innolab</title>
     <!-- Favicon icon -->
 	<link href="{{asset('Dashboard/vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('Dashboard/images/ab-logo-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('Dashboard/images/ab-logo-icon2.png')}}">
     <link href="{{asset('Dashboard/vendor/jqvmap/css/jqvmap.min.css')}}" rel="stylesheet">
 	<link rel="stylesheet" href="{{asset('Dashboard/vendor/chartist/css/chartist.min.css')}}">
     <link href="{{asset('Dashboard/vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet">
@@ -18,7 +18,28 @@
 
 </head>
 
+<style>
+    .primary{
+        background-color: #4153F1 !important;
+    }
+    .badge-primary{
+        background-color: #4153F1 !important;
 
+    }
+
+    .btn-outline-primary {
+        color: #4153F1;
+        border-color: #4153F1 ;
+    }
+    .btn-outline-primary:hover {
+        color: #ffffff;
+        background-color: #4153F1 ;
+    }
+    .btn-primary  {
+        color: #ffffff;
+        background-color: #4153F1 ;
+    }
+</style>
 
 <body>
 
@@ -41,7 +62,6 @@
         Main wrapper start
     ***********************************-->
     <div id="main-wrapper">
-
 		
         <!--**********************************
             Header start
@@ -51,7 +71,11 @@
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left" style="margin-top: 20px; margin-left:-60px;">
-                                <img src="{{asset('Dashboard/images/ab-logo.png')}}" height="100%" width="100%" class="mb-4" alt=""><br/>
+                            @if (!$labo->logo)
+                            <img src="{{asset('logos/innolab-logo.png')}}" height="100%" width="100%" class="mb-4" alt=""><br/>
+                            @else
+                            <img src="{{asset('logos/'.$labo->logo)}}" height="100%" width="100%" class="mb-4" alt=""><br/>
+                            @endif
                         </div>
 
                         <ul class="navbar-nav header-right">
@@ -90,7 +114,6 @@
                                     </form>
                                 </div>
                             </li>
-							
                         </ul>
                     </div>
                 </nav>
@@ -101,31 +124,21 @@
         ***********************************-->
 
         
-
         @yield('content')
-
 
         <!--**********************************
             Footer start
         ***********************************-->
-        <div class="footer">
+        <div class="footer" style="padding-left: 0; background-color:#ffffff">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/" target="_blank">InnoDev</a></p>
+                <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank">InnoDev</a></p>
             </div>
         </div>
         <!--**********************************
             Footer end
         ***********************************-->
 		
-        <!--**********************************
-           Support ticket button start
-        ***********************************-->
-
-        <!--**********************************
-           Support ticket button end
-        ***********************************-->
-
-
+       
     </div>
     <!--**********************************
         Main wrapper end
@@ -182,7 +195,7 @@
 
 	})(jQuery);	
 	</script>
-@stack('consultation-detail')
-@stack('modal-detaildocument-scripts')
+    @stack('consultation-detail')
+    @stack('modal-detaildocument-scripts')
 </body>
 </html>
