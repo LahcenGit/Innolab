@@ -27,7 +27,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{{asset('Front/assets/css/style.css')}}" rel="stylesheet">
-
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- =======================================================
   * Template Name: FlexStart - v1.11.0
   * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
@@ -197,31 +197,35 @@
           </div>
 
           <div class="col-lg-6">
-            <form action="{{asset('/contact')}}" method="post" class="php-email-form">
+            <form id="submitF" >
+                
               <div class="row gy-4">
 
                 <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                  <input type="text" id="name" class="form-control" placeholder="Your Name" required>
                 </div>
 
                 <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                  <input type="email" class="form-control" id="email" placeholder="Your Email" required>
                 </div>
 
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                  <input type="text" class="form-control" id="subject" placeholder="Subject" required>
                 </div>
 
                 <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                  <textarea class="form-control" id="message" rows="6" placeholder="Message" required></textarea>
                 </div>
 
                 <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
+                  
+                    <div class="alert alert-success message-success" role="alert" style="display:none ;">
+                    Your message has been sent. Thank you!
+                    </div>
+                    <div class="alert alert-danger message-error" role="alert" style="display:none ;">
+                    Your message has not sent!
+                    </div>
+                    <button type="button" class="btn btn-primary btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center add-message">Send Message</button>
                 </div>
 
               </div>
@@ -275,6 +279,47 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
+  <script>
+  $.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+  });
+
+  $(".add-message").on('click',function(e){
+
+        alert(1);
+        
+        e.preventDefault();
+        let name = $('#name').val();
+        let email = $('#email').val();
+        let subject = $('#subject').val();
+        let message = $('#message').val();
+        $.ajax({
+          type:"POST",  
+          url: "/contact",
+          data:{
+            "_token": "{{ csrf_token() }}",
+            name:name,
+            email:email,
+            subject:subject,
+            message:message,
+            
+           },
+         success:function(response){
+           if(response == 1){
+            $("#message-success").css("display", "block");
+           }
+           else{
+            $("#message-error").css("display", "block");
+           }
+            
+          },
+        
+          });
+       
+   });
+</script>  
   <script src="{{asset('Front/assets/vendor/purecounter/purecounter_vanilla.js')}}"></script>
   <script src="{{asset('Front/assets/vendor/aos/aos.js')}}"></script>
   <script src="{{asset('Front/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -285,6 +330,8 @@
 
   <!-- Template Main JS File -->
   <script src="{{asset('Front/assets/js/main.js')}}"></script>
+
+ 
 
 </body>
 

@@ -28,7 +28,7 @@ class MailContact extends Mailable
      */
     public function build()
     {
-        $subject = "Message depuis DahliasInstitute";
+        $subject = "Message depuis InnoLab";
         return $this
         ->subject( $subject)
         ->view('mail.contact')

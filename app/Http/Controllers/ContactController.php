@@ -10,7 +10,7 @@ class ContactController extends Controller
     //
     public function store(Request $request){
 
-        Mail::to('lahcenebenmouloud@gmail.com')->send(new MailContact($request));
+        Mail::to('benosmanhind@gmail.com')->send(new MailContact($request));
         return 1;
     }
 }
