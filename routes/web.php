@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
 
     if(Auth::guest()){
-        return view('/welcome');
+        return redirect('/');
     }
     else if(Auth::user()->type == 'labo'){
         return redirect('/dashboard-labo');
@@ -27,6 +27,10 @@ Route::get('/', function () {
     else{
         return redirect('/dashboard-patient');
     }
+});*/
+
+Route::get('/', function () {
+    return view('welcome');
 });
 
 
@@ -38,7 +42,7 @@ Auth::routes([
     
 ]);
 Route::get('/dashboard-patient',[App\Http\Controllers\HomeController::class,'patient'])->middleware('can:dashboard.patient');
-Route::get('/dashboard-labo',[App\Http\Controllers\HomeController::class,'labo'])->middleware('can:dashboard.labo');
+Route::get('/dashboard-labo',[App\Http\Controllers\HomeController::class,'labo']);
 Route::get('/dashboard-labo/{id}', [App\Http\Controllers\HomeController::class, 'LabotWithDocument'])->middleware('can:dashboard.labo');
 Route::resource('/dashboard-patient/profil',ProfilController::class)->middleware('can:dashboard.patient');
 Route::get('/dashboard-patient/{year}', [App\Http\Controllers\HomeController::class, 'patientWithYear'])->middleware('can:dashboard.patient');
