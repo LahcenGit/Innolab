@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('py')->nullable();
             $table->string('flag')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -45,7 +45,7 @@
        
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            <button type="button" class="btn btn-primary" style="background-color: #4153F1; border-color: #4153F1;" data-dismiss="modal">Fermer</button>
           
         </div>
       </div>

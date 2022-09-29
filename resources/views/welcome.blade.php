@@ -225,7 +225,7 @@
                     <div class="alert alert-danger message-error" role="alert" style="display:none ;">
                     Your message has not sent!
                     </div>
-                    <button type="button" class="btn btn-primary btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center add-message">Send Message</button>
+                    <button type="button" class="btn btn-primary btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center add-message"style="background-color: #4153F1; border-color: #4153F1;">Send Message</button>
                 </div>
 
               </div>

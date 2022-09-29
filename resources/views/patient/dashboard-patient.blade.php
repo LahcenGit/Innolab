@@ -51,7 +51,7 @@ function translate($month) {
 		<div class="row page-titles mx-0">
 			<div class="col-sm-6 p-md-0">
 				<div class="welcome-text">
-					<h4>{{Str::ucfirst($patient->first_name)}} {{Str::ucfirst($patient->last_name)}} </h4>
+					<h4 class="title">{{Str::ucfirst($patient->first_name)}} {{Str::ucfirst($patient->last_name)}} </h4>
 					<span> {{$patient->date_birth}}, @if($patient->sexe == 'm') Masculin @else Féminin @endif</span>
 				</div>
 			</div>
@@ -71,7 +71,7 @@ function translate($month) {
 					</div>
 					<div class="card-body">
 							@foreach ($years as $year)
-							<a href="{{asset('/dashboard-patient/'.$year->year)}}" class="btn btn-outline-primary m-1" style="width: 100%">{{$year->year}}</a>
+							<a href="{{asset('/dashboard-patient/'.$year->year)}}"  @if($y == $year->year) class="btn btn-primary m-1" @else class="btn btn-outline-primary m-1" @endif style="width: 100%">{{$year->year}}</a>
 							@endforeach
 			
 					</div>
@@ -105,9 +105,9 @@ function translate($month) {
 										@if($document->flag_etat == 2)
 											<label class="mb-1"><strong>Etat : </strong> Payé</label>  <i style="color:#00c855" class="ml-2 fa-solid fa-circle"></i> <br>
 											<div class="center mt-2" >
-											<a href="{{asset('files/'.$document->document_name.'.pdf')}}" class="btn btn-primary " style="background-color: #0083CC; border-color: #0083CC; padding-top:12px;" >
+											<a href="{{asset('files/'.$document->document_name.'.pdf')}}" class="btn btn-primary " style="background-color: #4153F1; border-color: #4153F1; padding-top:12px;" >
 												Afficher le Resultat <i class="ml-2 fa-solid fa-file-lines fa-xl"></i>   </a>
-												<button data-id="{{$document->id}}" class="btn btn-success detail-document" ><i class="fa fa-eye"></i></button>
+												<button data-id="{{$document->id}}" class="btn btn-success detail-document" style=" padding-top:12px;"><i class="fa fa-eye"></i></button>
 											</div>
 										@endif
 									@endforeach

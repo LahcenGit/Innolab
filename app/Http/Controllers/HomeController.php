@@ -35,7 +35,8 @@ class HomeController extends Controller
     }
 
     public function patient(){
-
+        $y = null;
+       
         $now = Carbon::now();
         $user = User::where('id',Auth::user()->id)->first();
         $patient = Patient::where('user_id', $user->id)->first();
@@ -81,12 +82,13 @@ class HomeController extends Controller
                                    ->groupBy('year')
                                    ->get();
 
-        return view('patient.dashboard-patient',compact('patient','user','years','recent_year','documents'));
+        return view('patient.dashboard-patient',compact('patient','user','years','recent_year','documents','y'));
     }
 
 
     public function patientWithYear($year){
-
+        $y = $year;
+       
         $now = Carbon::now();
         $user = User::where('id',Auth::user()->id)->first();
         $patient = Patient::where('user_id', $user->id)->first();
@@ -112,7 +114,7 @@ class HomeController extends Controller
 
         $keys = $documents->keys();
        
-        return view('patient.dashboard-patient',compact('patient','user','years','recent_year','documents'));
+        return view('patient.dashboard-patient',compact('patient','user','years','recent_year','documents','y'));
     }
 
 
@@ -138,34 +140,28 @@ class HomeController extends Controller
     public function labo(){
         $id=null;
         $user = User::where('id',Auth::user()->id)->first();
+        $laboratory = Laboratory::where('user_id', $user->id)->first();
         $labo = Laboratory::where('user_id', $user->id)->first();
-        $labos = Document::where('laboratory_destination_id',$labo->id)
+        $labos = Document::where('laboratory_destination_id', $laboratory->id)
                                    ->where('laboratory_destination_id','!=', NULL)
                                    ->selectRaw('laboratory_id')
                                    ->groupBy('laboratory_id')
                                    ->get();
 
-        $recent_labo = Document::where('laboratory_destination_id',$labo->id)
+        $recent_labo = Document::where('laboratory_destination_id', $laboratory->id)
                                    ->where('laboratory_destination_id','!=', NULL)
                                    ->selectRaw('laboratory_id')
                                    ->groupBy('laboratory_id')
                                    ->first();
                                    
         if($recent_labo){
-            $documents = Document::where('laboratory_destination_id',$labo->id)
-                                    ->where('laboratory_id',$recent_labo->laboratory_id)
-                                    ->selectRaw('MONTHNAME(created_at) month')
-                                    ->selectRaw('analyse')
-                                    ->selectRaw('document_name')
-                                    ->selectRaw('flag_etat')
-                                    ->selectRaw('created_at')
-                                    ->selectRaw('patient_id')
+            $documents = Document::where('laboratory_destination_id', $laboratory->id)
                                     ->get();
-            $document_en_attente = Document::where('laboratory_destination_id',$labo->id)
+            $document_en_attente = Document::where('laboratory_destination_id', $laboratory->id)
                                     ->where('flag_etat',0)
                                     ->count();
-            $document_pret = Document::where('laboratory_destination_id',$labo->id)
-                                     ->where('flag_etat',1)
+            $document_pret = Document::where('laboratory_destination_id', $laboratory->id)
+                                     ->where('flag_etat',2)
                                      ->count();
             $total = $document_en_attente + $document_pret;
         }
@@ -178,13 +174,14 @@ class HomeController extends Controller
         } 
         
        
-        return view('labo.dashboard-labo',compact('labos','documents','document_en_attente','document_pret','total','labo','id'));
+        return view('labo.dashboard-labo',compact('labos','documents','document_en_attente','document_pret','total','laboratory','id','labo'));
       
     }
 
     public function LabotWithDocument($id){
 
         $id = $id;
+        $laboratory = Laboratory::find($id);
         $user = User::where('id',Auth::user()->id)->first();
         $labo = Laboratory::where('user_id', $user->id)->first();
         $labos = Document::where('laboratory_destination_id',$labo->id)
@@ -208,6 +205,6 @@ class HomeController extends Controller
                                      ->where('flag_etat',1)
                                      ->count();
         $total = $document_en_attente + $document_pret;
-        return view('labo.dashboard-labo',compact('labos','documents','document_en_attente','document_pret','total','id'));
+        return view('labo.dashboard-labo',compact('labos','documents','document_en_attente','document_pret','total','id','laboratory','labo'));
     }
 }

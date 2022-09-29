@@ -77,7 +77,7 @@ class LaboratoryController extends BaseController
     public function update(Request $request, $id_logiciel)
     {
         //
-        $labo = Laboratory::find($id_logiciel);
+        $labo = Laboratory::where('id_logiciel',$id_logiciel)->first();
         $labo->designation = $request->designation;
         $labo->description = $request->description;
         $labo->id_logiciel = $request->id_logiciel;
@@ -100,8 +100,10 @@ class LaboratoryController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id_logiciel)
-   {   
-        $labo = Laboratory::find($id_logiciel);
+    {   
+        $labo = Laboratory::where('id_logiciel',$id_logiciel)->first();
+        $user = User::where('id',$labo->user_id);
+        $user->delete();
         $labo->delete();
         return $this->sendResponse($labo, 'Laboratory was successfully deleted.');
     }

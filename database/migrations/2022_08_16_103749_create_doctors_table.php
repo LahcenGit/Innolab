@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('flag')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('laboratory_id')->references('id')->on('laboratories')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

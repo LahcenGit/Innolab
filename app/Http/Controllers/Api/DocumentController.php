@@ -37,8 +37,7 @@ class DocumentController extends BaseController
     {
         //
         $document = new Document();
-        $patient = Patient::where('id_logiciel',$request->id_logiciel)->first();
-        $document->patient_id = $patient->id;
+        $document->patient_id = $request->patient_id;
         $document->laboratory_id = $request->laboratory_id;
         $document->laboratory_destination_id = $request->laboratory_destination_id;
         $document->id_logiciel= $request->id_logiciel;
@@ -48,14 +47,7 @@ class DocumentController extends BaseController
         $document->date = $request->date;
         $document->save();
 
-        $detaildocument = new Detaildocument();
-        $detaildocument->document_id = $document->id;
-        $detaildocument->rubrique = $request->rubrique;
-        $detaildocument->value = $request->value;
-        $detaildocument->unite = $request->unite;
-        $detaildocument->norme = $request->norme;
-        $detaildocument->flag = $request->flag;
-        $detaildocument->save();
+       
        
         return $this->sendResponse($document, 'Document was successfully created.');
     }
@@ -80,9 +72,8 @@ class DocumentController extends BaseController
      */
     public function update(Request $request , $id_logiciel)
     {       
-        $document = Document::find($id_logiciel);
-        $patient = Patient::where('id_logiciel',$id_logiciel)->first();
-        $document->patient_id = $patient->id;
+        $document = Document::where('id_logiciel',$id_logiciel)->first();
+        $document->patient_id = $request->patient_id;
         $document->laboratory_id = $request->laboratory_id;
         $document->laboratory_destination_id = $request->laboratory_destination_id;
         $document->document_name = $request->document_name;
@@ -100,7 +91,7 @@ class DocumentController extends BaseController
      */
     public function destroy($id_logiciel)
     {
-        $document = Document::find($id_logiciel);
+        $document = Document::where('id_logiciel',$id_logiciel)->first();
         $document->delete();
         return $this->sendResponse($document, 'Document was successfully deleted.');
     }

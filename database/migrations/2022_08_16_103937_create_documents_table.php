@@ -27,6 +27,7 @@ return new class extends Migration
             $table->foreign('laboratory_id')->references('id')->on('laboratories')->onDelete('cascade');
             $table->foreign('laboratory_destination_id')->references('id')->on('laboratories')->onDelete('cascade');
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

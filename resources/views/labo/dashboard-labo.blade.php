@@ -17,9 +17,9 @@
 						<h4 class="card-title">Laboratoires</h4>
 					</div>
 					<div class="card-body">
-                                    @foreach ($labos as $labo)
-                                    <a href="{{asset('/dashboard-labo/'.$labo->laboratory_id)}}" id="{{$labo->laboratory_id}}" 
-                                     @if($id == $labo->laboratory_id )  class="btn btn-primary m-1" @else class="btn btn-outline-primary m-1" @endif style="width: 100% ">@if($documents != null){{$labo->getLabo()->designation}}@endif</a>
+                                    @foreach ($labos as $l)
+                                    <a href="{{asset('/dashboard-labo/'.$l->laboratory_id)}}" id="{{$l->laboratory_id}}" 
+                                     @if($id == $l->laboratory_id )  class="btn btn-primary m-1" @else class="btn btn-outline-primary m-1" @endif style="width: 100% ">@if($documents != null){{$l->getLabo()->designation}}@endif</a>
                                     @endforeach
 					</div>
 				</div>
@@ -28,7 +28,7 @@
 			<div class="col-md-9 p-md-1">
 				<div class="card ">
 					<div class="card-header">
-						<h4 class="card-title">Documents</h4>
+						<h4 class="card-title">Documents <a href="#" class="badge badge-primary">{{$laboratory->designation}}</a></h4>
 					</div>
 					<div class="card-body">
                                     @if($documents == null)
