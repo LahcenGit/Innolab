@@ -18,6 +18,7 @@ class DetaildocumentController extends BaseController
         $detaildocument->unite = $request->unite;
         $detaildocument->norme = $request->norme;
         $detaildocument->flag = $request->flag;
+        $detaildocument->flag_norme = $request->flag_norme;
         $detaildocument->save();
         return $this->sendResponse($detaildocument, 'Detail document was successfully created.');
     }
@@ -30,6 +31,7 @@ class DetaildocumentController extends BaseController
         $detaildocument->unite = $request->unite;
         $detaildocument->norme = $request->norme;
         $detaildocument->flag = $request->flag;
+        $detaildocument->flag_norme = $request->flag_norme;
         $detaildocument->save();
         return $this->sendResponse($detaildocument, 'Detail document was successfully updated.');
     }

@@ -52,7 +52,7 @@ function translate($month) {
 			<div class="col-sm-6 p-md-0">
 				<div class="welcome-text">
 					<h4 class="title">{{Str::ucfirst($patient->first_name)}} {{Str::ucfirst($patient->last_name)}} </h4>
-					<span> {{$patient->date_birth}}, @if($patient->sexe == 'm') Masculin @else Féminin @endif</span>
+					<span> {{$patient->date_birth}}, @if($patient->sexe == 0) Masculin @else Féminin @endif</span>
 				</div>
 			</div>
 			<div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">

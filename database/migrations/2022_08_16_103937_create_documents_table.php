@@ -24,9 +24,11 @@ return new class extends Migration
             $table->string('analyse');
             $table->tinyInteger('flag_etat')->nullable();
             $table->string('date')->nullable();
+            $table->string('token')->nullable();
             $table->foreign('laboratory_id')->references('id')->on('laboratories')->onDelete('cascade');
             $table->foreign('laboratory_destination_id')->references('id')->on('laboratories')->onDelete('cascade');
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

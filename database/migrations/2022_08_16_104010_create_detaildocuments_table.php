@@ -21,7 +21,8 @@ return new class extends Migration
             $table->float('value');
             $table->string('unite');
             $table->string('norme');
-            $table->integer('flag');
+            $table->tinyInteger('flag');
+            $table->tinyInteger('flag_norme');
             $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();

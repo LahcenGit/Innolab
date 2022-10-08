@@ -32,6 +32,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('dashboard.labo',function(){
             return Auth::user()->type == 'labo';
            });
+        Gate::define('dashboard.doctor',function(){
+            return Auth::user()->type == 'doctor';
+           });
         //
     }
 }

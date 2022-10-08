@@ -37,7 +37,11 @@ class DocumentController extends BaseController
     {
         //
         $document = new Document();
+        $chars ="abcdefghijklmnopqrstuvwxyz0123456789";
+        $token = substr(str_shuffle($chars),0,8);
+        $document->token = $token;
         $document->patient_id = $request->patient_id;
+        $document->doctor_id = $request->doctor_id;
         $document->laboratory_id = $request->laboratory_id;
         $document->laboratory_destination_id = $request->laboratory_destination_id;
         $document->id_logiciel= $request->id_logiciel;
@@ -47,8 +51,6 @@ class DocumentController extends BaseController
         $document->date = $request->date;
         $document->save();
 
-       
-       
         return $this->sendResponse($document, 'Document was successfully created.');
     }
 
@@ -75,6 +77,7 @@ class DocumentController extends BaseController
         $document = Document::where('id_logiciel',$id_logiciel)->first();
         $document->patient_id = $request->patient_id;
         $document->laboratory_id = $request->laboratory_id;
+        $document->doctor_id = $request->doctor_id;
         $document->laboratory_destination_id = $request->laboratory_destination_id;
         $document->document_name = $request->document_name;
         $document->analyse = $request->analyse;

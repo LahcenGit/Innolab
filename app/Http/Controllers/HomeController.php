@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Detaildocument;
+use App\Models\Doctor;
 use App\Models\Document;
 use App\Models\Laboratory;
 use App\Models\Patient;
@@ -150,23 +151,27 @@ class HomeController extends Controller
             $documents = Document::where('laboratory_destination_id', $laboratory->id)
                                     ->get();
             $document_en_attente = Document::where('laboratory_destination_id', $laboratory->id)
-                                    ->where('flag_etat',0)
+                                    ->where('flag_etat',1)
                                     ->count();
             $document_pret = Document::where('laboratory_destination_id', $laboratory->id)
                                      ->where('flag_etat',2)
                                      ->count();
-            $total = $document_en_attente + $document_pret;
+            $document_en_cour = Document::where('laboratory_destination_id',$labo->id)
+                                    ->where('flag_etat',0)
+                                    ->count();
+            $total = $document_en_attente + $document_pret + $document_en_cour;;
         }
        
         else{
             $documents = null;
             $document_en_attente = 0;
             $document_pret =0;
+            $document_en_cour =0;
             $total = 0;
         } 
         
        
-        return view('labo.dashboard-labo',compact('labos','documents','document_en_attente','document_pret','total','laboratory','id','labo'));
+        return view('labo.dashboard-labo',compact('labos','documents','document_en_attente','document_pret','total','laboratory','id','labo','document_en_cour'));
       
     }
 
@@ -191,12 +196,57 @@ class HomeController extends Controller
                                     ->get();
 
         $document_en_attente = Document::where('laboratory_destination_id',$labo->id)
-                                        ->where('flag_etat',0)
+                                        ->where('flag_etat',1)
                                         ->count();
         $document_pret = Document::where('laboratory_destination_id',$labo->id)
-                                     ->where('flag_etat',1)
+                                     ->where('flag_etat',2)
                                      ->count();
-        $total = $document_en_attente + $document_pret;
-        return view('labo.dashboard-labo',compact('labos','documents','document_en_attente','document_pret','total','id','laboratory','labo'));
+        $document_en_cour = Document::where('laboratory_destination_id',$labo->id)
+                                    ->where('flag_etat',0)
+                                    ->count();
+        $total = $document_en_attente + $document_pret + $document_en_cour;
+        return view('labo.dashboard-labo',compact('labos','documents','document_en_attente','document_pret','total','id','laboratory','labo','document_en_cour'));
     }
+
+
+   public function documentDoctor(){
+    $id = null;
+    $doctor = Doctor::where('user_id',auth::user()->id)->first();
+    $documents = Document::where('doctor_id',$doctor->id)->get();
+    $patients =  Document::where('doctor_id',$doctor->id)->get();
+    $document_en_attente = Document::where('doctor_id',$doctor->id)
+                                    ->where('flag_etat',0)
+                                    ->count();
+    $document_pret = Document::where('doctor_id',$doctor->id)
+                               ->where('flag_etat',2)
+                               ->count();
+    $document_en_cour = Document::where('doctor_id',$doctor->id)
+                               ->where('flag_etat',0)
+                               ->count();
+        
+    $total = $document_en_attente + $document_pret +$document_en_cour;
+    return view('doctor.dashboard-doctor',compact('documents','document_en_attente','document_pret','total','id','patients','doctor','document_en_cour'));
+   }
+
+   public function documentPatient($id){
+    $id = $id;
+    $doctor = Doctor::where('user_id',auth::user()->id)->first();
+    $documents = Document::where('doctor_id',$doctor->id)
+                          ->where('patient_id',$id)
+                          ->get();
+    $patients =  Document::where('doctor_id',$doctor->id)->get();
+    $document_en_attente = Document::where('doctor_id',$doctor->id)
+                                    ->where('flag_etat',1)
+                                    ->count();
+    $document_pret = Document::where('doctor_id',$doctor->id)
+                               ->where('flag_etat',2)
+                               ->count();
+    $document_en_cour = Document::where('doctor_id',$doctor->id)
+                               ->where('flag_etat',0)
+                               ->count();
+        
+    $total = $document_en_attente + $document_pret +$document_en_cour;
+
+    return view('doctor.dashboard-doctor',compact('documents','document_en_attente','document_pret','total','id','patients','doctor','document_en_cour'));
+   }
 }

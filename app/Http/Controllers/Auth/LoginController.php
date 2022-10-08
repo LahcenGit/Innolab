@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Patient;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -50,17 +51,28 @@ class LoginController extends Controller
         
         if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']),$remember_me))
         {
-            if(auth::user()->type == 'patient'){
+            $patient = Patient::where('user_id',auth::user()->id)->first();
+            if(auth::user()->type == 'patient' && $patient->flag_etat == 0){
                 return redirect('dashboard-patient');
             }
-            else{
+            else if(auth::user()->type == 'labo'){
                 return redirect('dashboard-labo');
             }
-            
+            else if(auth::user()->type == 'doctor'){
+                return redirect('dashboard-doctor');
+            }
+            else{
+                $error = 'Email-Address And Password Are Wrong.';
+          
+                return view('welcome',compact('error'));
+            }
         }
         else{
-            return redirect()->route('login')
-                ->with('error','Email-Address And Password Are Wrong.');
+
+            $error = 'Email-Address And Password Are Wrong.';
+          
+            return view('welcome',compact('error'));
+                
         }
           
     }

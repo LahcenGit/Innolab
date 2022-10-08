@@ -46,7 +46,7 @@ class PatientController extends BaseController
             $user = new User();
             $user->username = $request->username;
             $user->password = Hash::make($request['password']);
-            $user->type = $request->type;
+            $user->type = 'patient';
             $user->save();
 
             $patient = new Patient();

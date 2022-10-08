@@ -94,6 +94,7 @@
                       <p class="form-text text-muted mb-3">
                         Pour les Laboratoires, medecins & patients.
                       </p>
+                      <h3>@if($error) {{$error}} @endif</h3>
                       <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="mb-3">

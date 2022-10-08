@@ -64,4 +64,7 @@ class Document extends Model
         $patient= Patient::where('id',$this->patient_id)->first();
         return $patient;
     }
+    public function doctor(){
+        return $this->belongsTo(Doctor::class,'doctor_id');
+    }
 }

@@ -22,9 +22,9 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('date_birth');
             $table->string('phone');
-            $table->string('sexe');
+            $table->tinyInteger('sexe');
             $table->string('email')->nullable();
-            $table->tinyInteger('flag_etat')->nullable();
+            $table->tinyInteger('flag_etat')->default(0);
             $table->string('flag')->nullable();
             $table->foreign('laboratory_id')->references('id')->on('laboratories')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

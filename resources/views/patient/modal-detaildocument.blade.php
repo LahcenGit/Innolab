@@ -28,6 +28,7 @@
               <td>Résultat</td>
               <td>Unité</td>
               <td>Normes</td>
+              <td></td>
             </tr>
           </thead>
           <tbody>
@@ -37,6 +38,7 @@
               <td>{{$detaildocument->value}}</td>
               <td>{{$detaildocument->unite}}</td>
               <td>{{$detaildocument->norme}}</td>
+              <td>@if($detaildocument->flag_norme == 0) Dans les normes @else Hors normes @endif</td>
               </tr>
            
               @endforeach
