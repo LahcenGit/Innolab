@@ -43,7 +43,7 @@ class LoginController extends Controller
   
         $this->validate($request, [
             'username' => 'required',
-            'password' => ['required', 'string', 'min:8'],
+            'password' => 'required',
         ]);
   
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
@@ -52,8 +52,16 @@ class LoginController extends Controller
         if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']),$remember_me))
         {
             $patient = Patient::where('user_id',auth::user()->id)->first();
-            if(auth::user()->type == 'patient' && $patient->flag_etat == 0){
-                return redirect('dashboard-patient');
+
+            if(auth::user()->type == 'patient'){
+                if($patient->flag_etat == 0){
+                    return redirect('dashboard-patient');
+                }
+                else{
+                    $error = 'Votre compte à été désactivé.';
+                    return view('welcome',compact('error'));
+                }
+                
             }
             else if(auth::user()->type == 'labo'){
                 return redirect('dashboard-labo');
@@ -61,18 +69,12 @@ class LoginController extends Controller
             else if(auth::user()->type == 'doctor'){
                 return redirect('dashboard-doctor');
             }
-            else{
-                $error = 'Email-Address And Password Are Wrong.';
-          
-                return view('welcome',compact('error'));
-            }
         }
-        else{
 
-            $error = 'Email-Address And Password Are Wrong.';
-          
+        else{
+           
+            $error = 'Coordonnées incorrectes. Veuillez réessayer.';
             return view('welcome',compact('error'));
-                
         }
           
     }

@@ -94,7 +94,7 @@
                       <p class="form-text text-muted mb-3">
                         Pour les Laboratoires, medecins & patients.
                       </p>
-                      <h3>@if($error) {{$error}} @endif</h3>
+                      
                       <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="mb-3">
@@ -112,7 +112,23 @@
                               Password is required
                             </div>
                         </div>
-        
+
+                         @if ($errors->any())
+                          <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                  <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                          </div><br />
+                        @endif
+
+                        @if($error) 
+                          <div class="alert alert-danger" role="alert">
+                            <span style="font-size: 15px;">  {{$error}}  </span>
+                          </div>
+                        @endif
+
                         <div class="form-row d-flex justify-content-between mt-4 mb-2">
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox ml-1">

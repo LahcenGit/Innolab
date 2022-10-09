@@ -43,8 +43,10 @@ Route::get('/message', function () {
 
 Auth::routes([
     'register' => false,
-    
 ]);
+
+
+
 Route::get('/dashboard-patient',[App\Http\Controllers\HomeController::class,'patient'])->middleware('can:dashboard.patient');
 Route::get('/dashboard-labo',[App\Http\Controllers\HomeController::class,'labo'])->middleware('can:dashboard.labo');
 Route::get('/dashboard-labo/{id}', [App\Http\Controllers\HomeController::class, 'LabotWithDocument'])->middleware('can:dashboard.labo');
@@ -58,5 +60,5 @@ Route::get('/consultation-pdf/{name}', [App\Http\Controllers\ConsultationControl
 Route::get('/consultation-detail/{month}/{year}', [App\Http\Controllers\HomeController::class, 'document']);
 Route::get('detail-document/{id}', [App\Http\Controllers\HomeController::class, 'detaildocument']);
 Route::get('document/{token}', [App\Http\Controllers\QrcodeController::class, 'qrCode']);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/contact',ContactController::class);
