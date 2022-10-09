@@ -11,6 +11,7 @@ class ProfilController extends Controller
 {
     //
 
+
     public function index(){
     $user = Auth::user();
        
