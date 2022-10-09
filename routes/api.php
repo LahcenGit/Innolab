@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->apiResource('/labo',LaboratoryController::cla
 Route::apiResource('/document',DocumentController::class);
 Route::apiResource('/doctor',DoctorController::class);
 Route::apiResource('/detail-document',DetaildocumentController::class);
-Route::post('/document/update', [App\Http\Controllers\DocumentController::class,'updateDocument']);
+
 Route::post('/login', [App\Http\Controllers\Api\ApiAuthController::class,'login']);
 
 
