@@ -34,9 +34,7 @@ Route::get('/', function () {
     $error = null;
     return view('welcome',compact('error'));
 });
-Route::get('/message', function () {
-    return view('message');
-});
+
 
 
 

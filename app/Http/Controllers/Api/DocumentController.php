@@ -37,9 +37,8 @@ class DocumentController extends BaseController
     {
         //
         $document = new Document();
-        $chars ="abcdefghijklmnopqrstuvwxyz0123456789";
-        $token = substr(str_shuffle($chars),0,8);
-        $document->token = $token;
+       
+        $document->token = $request->token;
         $document->patient_id = $request->patient_id;
         $document->doctor_id = $request->doctor_id;
         $document->laboratory_id = $request->laboratory_id;
@@ -74,7 +73,10 @@ class DocumentController extends BaseController
      */
     public function update(Request $request , $id_logiciel)
     {       
-        $document = Document::where('id_logiciel',$id_logiciel)->first();
+        $laboratory_id = $request->laboratory_id;
+        $document = Document::where('id_logiciel',$id_logiciel)
+                              ->where('laboratory_id',$laboratory_id)
+                              ->first();
         $document->patient_id = $request->patient_id;
         $document->laboratory_id = $request->laboratory_id;
         $document->doctor_id = $request->doctor_id;
@@ -93,7 +95,7 @@ class DocumentController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id_logiciel)
-    {
+    {   
         $document = Document::where('id_logiciel',$id_logiciel)->first();
         $document->delete();
         return $this->sendResponse($document, 'Document was successfully deleted.');

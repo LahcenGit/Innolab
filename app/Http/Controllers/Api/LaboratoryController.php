@@ -34,6 +34,14 @@ class LaboratoryController extends BaseController
     public function store(Request $request)
     {
         //
+        $user = User::where('username',$request->username)->first();
+        if($user){
+            return $this->sendResponse($user, 'L utilisateur existe déja.');
+        }
+        $user = User::where('email',$request->email)->first();
+        if($user){
+            return $this->sendResponse($user, 'L utilisateur existe déja.');
+        }
         $user = new User();
         $user->username = $request->username;
         $user->password = Hash::make($request['password']);
@@ -74,10 +82,10 @@ class LaboratoryController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id_logiciel)
+    public function update(Request $request, $user_id)
     {
         //
-        $labo = Laboratory::where('id_logiciel',$id_logiciel)->first();
+        $labo = Laboratory::where('user_id',$user_id)->first();
         $labo->designation = $request->designation;
         $labo->description = $request->description;
         $labo->id_logiciel = $request->id_logiciel;
@@ -99,9 +107,9 @@ class LaboratoryController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_logiciel)
+    public function destroy($user_id)
     {   
-        $labo = Laboratory::where('id_logiciel',$id_logiciel)->first();
+        $labo = Laboratory::where('user_id',$user_id)->first();
         $user = User::where('id',$labo->user_id);
         $user->delete();
         $labo->delete();

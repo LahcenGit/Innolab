@@ -15,11 +15,11 @@ class DoctorController  extends BaseController
       
         $user = User::where('username',$request->username)->first();
         if($user){
-            return "exist";
+            return $this->sendResponse($user, 'L utilisateur existe déja.');
         }
         $user = User::where('email',$request->email)->first();
         if($user){
-            return "exist";
+            return $this->sendResponse($user, 'L utilisateur existe déja.');
         }
         $user = new User();
         $user->username = $request->username;
@@ -29,11 +29,11 @@ class DoctorController  extends BaseController
         
         $doctor = Doctor::where('email',$request->email)->first();
         if($doctor){
-            return "exist";
+            return $this->sendResponse($doctor, 'Le médecin existe déja.');
         }
         $doctor = Doctor::where('phone_fixe',$request->phone_fixe)->first();
         if($doctor){
-            return "exist";
+            return $this->sendResponse($doctor, 'Le médecin existe déja.');
         }
         $doctor = new Doctor();
         $doctor->user_id = $user->id;
@@ -45,16 +45,16 @@ class DoctorController  extends BaseController
         $doctor->phone = $request->phone;
         $doctor->phone_fixe = $request->phone_fixe;
         $doctor->speciality = $request->speciality;
-        $doctor->adresse = $request->address;
+        $doctor->adresse = $request->adresse;
         $doctor->flag_etat = $request->flag_etat;
         $doctor->save();
         return $this->sendResponse($doctor, 'Doctor was successfully created.');
     }
 
 
-    public function update(Request $request , $id_logiciel){
-        $doctor = Doctor::where('id_logiciel',$id_logiciel)->first();
-        $doctor->user_id = $request->user_id;
+    public function update(Request $request , $user_id){
+        $doctor = Doctor::where('user_id',$user_id)->first();
+       
         $doctor->first_name = $request->first_name;
         $doctor->last_name = $request->last_name;
         $doctor->laboratory_id = $request->laboratory_id;
@@ -63,14 +63,14 @@ class DoctorController  extends BaseController
         $doctor->phone = $request->phone;
         $doctor->phone_fixe = $request->phone_fixe;
         $doctor->speciality = $request->speciality;
-        $doctor->adresse = $request->address;
+        $doctor->adresse = $request->adresse;
         $doctor->flag_etat = $request->flag_etat;
         $doctor->save();
         return $this->sendResponse($doctor, 'Doctor was successfully updated.');
     }
 
-    public function destroy($id_logiciel){
-        $doctor = Doctor::where('id_logiciel',$id_logiciel)->first();
+    public function destroy($user_id){
+        $doctor = Doctor::where('user_id',$user_id)->first();
         $user = User::where('id',$doctor->user_id)->first();
         $user->delete();
         $doctor->delete();

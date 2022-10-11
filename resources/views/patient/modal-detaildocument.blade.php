@@ -28,17 +28,16 @@
               <td>Résultat</td>
               <td>Unité</td>
               <td>Normes</td>
-              <td></td>
+              
             </tr>
           </thead>
           <tbody>
               @foreach($detaildocuments as $detaildocument)
               <tr>
               <td>@if($detaildocument->flag == 0){{$detaildocument->rubrique}} @else <b>{{$detaildocument->rubrique}}@endif</b></td>
-              <td>{{$detaildocument->value}}</td>
+              <td @if($detaildocument->flag_norme == 1) style="color: #FF0000 ;" @endif>{{$detaildocument->value}}</td>
               <td>{{$detaildocument->unite}}</td>
               <td>{{$detaildocument->norme}}</td>
-              <td>@if($detaildocument->flag_norme == 0) Dans les normes @else Hors normes @endif</td>
               </tr>
            
               @endforeach

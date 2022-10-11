@@ -17,10 +17,6 @@
 						<h4 class="card-title">Laboratoires</h4>
 					</div>
 					<div class="card-body">
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
                                     @foreach ($labos as $l)
                                     <a href="{{asset('/dashboard-labo/'.$l->laboratory_id)}}" id="{{$l->laboratory_id}}" 
                                      @if($id == $l->laboratory_id )  class="btn btn-primary m-1" @else class="btn btn-outline-primary m-1" @endif style="width: 100% ">@if($documents != null){{$l->getLabo()->designation}}@endif</a>

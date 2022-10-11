@@ -36,11 +36,11 @@ class PatientController extends BaseController
         //
             $user = User::where('username',$request->username)->first();
             if($user){
-                return "exist";
+                return $this->sendResponse($user, 'L utilisateur existe déja.');
             }
             $user = User::where('email',$request->email)->first();
             if($user){
-                return "exist";
+                return $this->sendResponse($user, 'L utilisateur existe déja.');
             }
         
             $user = new User();
@@ -83,10 +83,10 @@ class PatientController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id_logiciel)
+    public function update(Request $request, $user_id)
     {
         //
-        $patient = Patient::where('id_logiciel',$id_logiciel)->first();
+        $patient = Patient::where('user_id',$user_id)->first();
         $patient->first_name = $request->first_name;
         $patient->last_name = $request->last_name;
         $patient->laboratory_id = $request->laboratory_id;
@@ -106,10 +106,10 @@ class PatientController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_logiciel)
+    public function destroy($user_id)
     {
         //
-        $patient = Patient::where('id_logiciel',$id_logiciel)->first();
+        $patient = Patient::where('user_id',$user_id)->first();
         $user = User::where('id',$patient->user_id)->first();
         $user->delete();
         $patient->delete();
