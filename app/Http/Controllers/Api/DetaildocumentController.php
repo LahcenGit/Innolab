@@ -26,12 +26,8 @@ class DetaildocumentController extends BaseController
     }
 
     public function update(Request $request , $id_logiciel){
-        $laboratory_id = $request->laboratory_id;
         $document_id = $request->document_id;
-        $document = Document::where('id',$document_id)
-                              ->where('laboratory_id',$laboratory_id)
-                              ->first();
-        $detaildocument =  Detaildocument::where('document_id',$document->id)
+        $detaildocument =  Detaildocument::where('document_id',$document_id)
                                            ->where('id_logiciel')
                                            ->first();
         $detaildocument->document_id = $request->document_id;

@@ -21,11 +21,7 @@ class DoctorController  extends BaseController
         if($user){
             return $this->sendResponse($user, 'L utilisateur existe déja.');
         }
-        $user = new User();
-        $user->username = $request->username;
-        $user->password = Hash::make($request['password']);
-        $user->type = 'doctor';
-        $user->save();
+        
         
         $doctor = Doctor::where('email',$request->email)->first();
         if($doctor){
@@ -35,6 +31,13 @@ class DoctorController  extends BaseController
         if($doctor){
             return $this->sendResponse($doctor, 'Le médecin existe déja.');
         }
+
+        $user = new User();
+        $user->username = $request->username;
+        $user->password = Hash::make($request['password']);
+        $user->type = 'doctor';
+        $user->save();
+        
         $doctor = new Doctor();
         $doctor->user_id = $user->id;
         $doctor->first_name = $request->first_name;
