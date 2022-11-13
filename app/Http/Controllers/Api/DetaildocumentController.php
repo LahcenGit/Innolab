@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Api\BaseController as BaseController;
 use App\Models\Document;
 
+
 class DetaildocumentController extends BaseController
 {
     //
@@ -28,7 +29,7 @@ class DetaildocumentController extends BaseController
     public function update(Request $request , $id_logiciel){
         $document_id = $request->document_id;
         $detaildocument =  Detaildocument::where('document_id',$document_id)
-                                           ->where('id_logiciel')
+                                           ->where('id_logiciel',$id_logiciel)
                                            ->first();
         $detaildocument->document_id = $request->document_id;
         $detaildocument->rubrique = $request->rubrique;
@@ -41,10 +42,12 @@ class DetaildocumentController extends BaseController
         return $this->sendResponse($detaildocument, 'Detail document was successfully updated.');
     }
 
-    public function destroy($id_logiciel){
-        $detaildocument = Detaildocument::where('id_logiciel',$id_logiciel)->first();
-        $detaildocument->delete();
-        return $this->sendResponse($detaildocument, 'Detail document was successfully deleted.');
+    public function destroy($document_id){
+      
+        $detaildocuments = Detaildocument::where('document_id',$document_id)->delete(); 
+        return $this->sendResponse($detaildocuments, 'Details document was successfully deleted.');
+        
     }
     
+
 }

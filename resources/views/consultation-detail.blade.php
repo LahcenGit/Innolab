@@ -40,7 +40,7 @@
                                      <label class="mb-1"><strong>Etat : </strong> En cours...</label>  <i style="color:#0089c8" class="ml-2 fa-solid fa-circle"></i> <br>
                                     @endif
                                     @if($document->etat == 1)
-                                     <label class="mb-1"><strong>Etat : </strong> Attendre le paiement</label>  <i style="color:#e78c03" class="ml-2 fa-solid fa-circle"></i> <br>
+                                     <label class="mb-1"><strong>Etat : </strong> En attente de paiement</label>  <i style="color:#e78c03" class="ml-2 fa-solid fa-circle"></i> <br>
                                     @endif
                                     @if($document->etat == 2)
                                      <label class="mb-1"><strong>Etat : </strong> Payé</label>  <i style="color:#00c855" class="ml-2 fa-solid fa-circle"></i> <br>

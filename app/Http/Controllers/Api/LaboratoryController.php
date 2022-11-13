@@ -34,13 +34,13 @@ class LaboratoryController extends BaseController
     public function store(Request $request)
     {
         //
-        $user = User::where('username',$request->username)->first();
-        if($user){
-            return $this->sendResponse($user, 'L utilisateur existe déja.');
-        }
-        $user = User::where('email',$request->email)->first();
-        if($user){
-            return $this->sendResponse($user, 'L utilisateur existe déja.');
+       
+
+        $labo = Laboratory::where('email',$request->email)->first();
+        
+        if($labo){
+            $user = User::find($labo->user_id);
+            return $this->sendResponse($labo,$user, 'user exist');
         }
         $user = new User();
         $user->username = $request->username;
@@ -53,6 +53,7 @@ class LaboratoryController extends BaseController
         $labo->designation = $request->designation;
         $labo->description = $request->description;
         $labo->id_logiciel = $request->id_logiciel;
+        $labo->pass_crypted = $request->pass_crypted;
         $labo->phone = $request->phone;
         $labo->phone_fixe = $request->phone_fixe;
         $labo->email = $request->email;
@@ -61,7 +62,7 @@ class LaboratoryController extends BaseController
         $labo->secondary_color = $request->secondary_color;
         $labo->flag_etat = $request->flag_etat;
         $labo->save();
-         return $this->sendResponse($labo, 'laboratory was successfully created.');
+         return $this->sendResponse($labo,$user, 'laboratory was successfully created.');
    }
 
     /**
@@ -82,10 +83,10 @@ class LaboratoryController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $user_id)
+    public function update(Request $request, $id)
     {
         //
-        $labo = Laboratory::where('user_id',$user_id)->first();
+        $labo = Laboratory::find($id);
         $labo->designation = $request->designation;
         $labo->description = $request->description;
         $labo->id_logiciel = $request->id_logiciel;

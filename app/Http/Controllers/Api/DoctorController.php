@@ -13,23 +13,12 @@ class DoctorController  extends BaseController
     //
     public function store(Request $request){
       
-        $user = User::where('username',$request->username)->first();
-        if($user){
-            return $this->sendResponse($user, 'L utilisateur existe déja.');
-        }
-        $user = User::where('email',$request->email)->first();
-        if($user){
-            return $this->sendResponse($user, 'L utilisateur existe déja.');
-        }
-        
-        
-        $doctor = Doctor::where('email',$request->email)->first();
+       
+     
+        $doctor = Doctor::where('phone',$request->phone)->first();
         if($doctor){
-            return $this->sendResponse($doctor, 'Le médecin existe déja.');
-        }
-        $doctor = Doctor::where('phone_fixe',$request->phone_fixe)->first();
-        if($doctor){
-            return $this->sendResponse($doctor, 'Le médecin existe déja.');
+            $user = User::find($doctor->user_id);
+            return $this->sendResponse($doctor,$user, 'doctor exist');
         }
 
         $user = new User();
@@ -45,13 +34,14 @@ class DoctorController  extends BaseController
         $doctor->laboratory_id = $request->laboratory_id;
         $doctor->id_logiciel = $request->id_logiciel;
         $doctor->email = $request->email;
+        $doctor->pass_crypted = $request->pass_crypted;
         $doctor->phone = $request->phone;
         $doctor->phone_fixe = $request->phone_fixe;
         $doctor->speciality = $request->speciality;
         $doctor->adresse = $request->adresse;
         $doctor->flag_etat = $request->flag_etat;
         $doctor->save();
-        return $this->sendResponse($doctor, 'Doctor was successfully created.');
+        return $this->sendResponse($doctor,$user, 'Doctor was successfully created');
     }
 
 

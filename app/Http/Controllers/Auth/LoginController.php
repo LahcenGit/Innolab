@@ -55,6 +55,7 @@ class LoginController extends Controller
             $patient = Patient::where('user_id',auth::user()->id)->first();
 
             if(auth::user()->type == 'patient'){
+                
                 if($patient->flag_etat == 0){
                     return redirect('dashboard-patient');
                 }

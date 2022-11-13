@@ -50,7 +50,7 @@ class DocumentController extends BaseController
         $document->date = $request->date;
         $document->save();
 
-        return $this->sendResponse($document, 'Document was successfully created.');
+        return $this->sendResponse($document, 'Document was successfully created');
     }
 
     /**

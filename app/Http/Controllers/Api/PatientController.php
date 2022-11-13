@@ -35,12 +35,9 @@ class PatientController extends BaseController
     {
         //
             $user = User::where('username',$request->username)->first();
+
             if($user){
-                return $this->sendResponse($user, 'L utilisateur existe déja.');
-            }
-            $user = User::where('email',$request->email)->first();
-            if($user){
-                return $this->sendResponse($user, 'L utilisateur existe déja.');
+                return $this->sendResponse($user, 'User exist');
             }
         
             $user = new User();
@@ -61,7 +58,7 @@ class PatientController extends BaseController
             $patient->flag_etat = $request->flag_etat;
             $patient->sexe = $request->sexe;
             $patient->save();
-            return $this->sendResponse($patient, 'Patient was successfully created.');
+            return $this->sendResponse($patient, 'Patient was successfully created');
         
     }
 
@@ -97,7 +94,7 @@ class PatientController extends BaseController
         $patient->flag_etat = $request->flag_etat;
         $patient->sexe = $request->sexe;
         $patient->save();
-        return $this->sendResponse($patient, 'Patient was successfully updated.');
+        return $this->sendResponse($patient, 'Patient was successfully updated');
     }
 
     /**

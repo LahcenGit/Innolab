@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('document_id');
             $table->bigInteger('id_logiciel');
             $table->string('rubrique');
-            $table->float('value');
+            $table->string('value')->nullable();
             $table->string('unite');
             $table->string('norme');
             $table->tinyInteger('flag');
