@@ -44,7 +44,9 @@
                                                       <tr>
                                                       <th>#</th>
                                                       <th>Patient</th>
+                                                      <th>Date de naissance</th>
                                                       <th>Analyse</th>
+                                                      <th>Date</th>
                                                       <th>Etat</th>
                                                       <th>Action</th>
                                                       </tr>
@@ -55,7 +57,9 @@
                                                       <tr >
                                                       <td>{{$loop->iteration}}</td>
                                                       <td>{{$document->getPatient()->first_name}} {{$document->getPatient()->last_name}}</td>
+                                                      <td>{{$document->getPatient()->date_birth}} </td>
                                                       <td>{{$document->analyse}}</td>
+                                                      <td>{{$document->date}}</td>
                                                       @if($document->flag_etat == 1 )
                                                       <td>
                                                       <span class="badge badge-warning">En attente</span>
