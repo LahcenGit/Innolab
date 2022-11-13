@@ -14,7 +14,7 @@
 			<div class="col-md-3 p-md-1 ">
 				<div class="card ">
 					<div class="card-header">
-						<h4 class="card-title">Les Patients</h4>
+						<h4 class="card-title">Patients</h4>
 					</div>
 					<div class="card-body">
 

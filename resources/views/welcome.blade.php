@@ -44,12 +44,12 @@
 
       <a href="#" class="logo d-flex align-items-center">
         <img src="{{asset('Front/assets/img/logo.png')}}" alt="">
-        <span>InnoLab</span>
+        <span>InnoLabo</span>
       </a>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Acceuil</a></li>
+          <li><a class="nav-link scrollto active" href="#hero">Accueil</a></li>
           <li><a class="nav-link scrollto" href="#about">A propos</a></li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
@@ -66,7 +66,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 d-flex flex-column justify-content-center mb-4">
-          <h1 data-aos="fade-up">InnoLab, la gestion complète de laboratoire d'analyses médicales</h1>
+          <h1 data-aos="fade-up">InnoLabo, la gestion complète de laboratoire d'analyses médicales</h1>
           <h2 data-aos="fade-up" data-aos-delay="400">Découvrez toutes les fonctionnalités</h2>
           <div data-aos="fade-up" data-aos-delay="600">
             <div class="text-center text-lg-start">
@@ -92,13 +92,13 @@
                     <div class="card-body p-4">
                       <h1 class="fs-4 card-title fw-bold ">Espace de connexion</h1>
                       <p class="form-text text-muted mb-3">
-                        Pour les Laboratoires, medecins & patients.
+                        Pour les laboratoires, médecins & patients.
                       </p>
                       
                       <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="mb-3">
-                          <label class="mb-2 text-muted" for="name"><b>Email Ou Username</b> </label>
+                          <label class="mb-2 text-muted" for="name"><b>Nom d'utilisateur</b> </label>
                           <input id="name" type="text" class="form-control" name="username" value="" placeholder="User-1234" required autofocus>
                           <div class="invalid-feedback">
                             Name is required	
@@ -269,7 +269,7 @@
           <div class="col-lg-5 col-md-12 footer-info">
             <a href="index.html" class="logo d-flex align-items-center">
               <img src="assets/img/logo.png" alt="">
-              <span>InnoLab</span>
+              <span>InnoLabo</span>
             </a>
             <p>Solution complète de gestion de laboratoire d'analyses medicales</p>
             <div class="social-links mt-3">
