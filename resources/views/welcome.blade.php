@@ -184,14 +184,14 @@
               <div class="col-md-6">
                 <div class="info-box">
                   <i class="bi bi-geo-alt"></i>
-                  <h3>Addresse</h3>
+                  <h3>Adresse</h3>
                   <p>Cité 270 log bat G N°109 ,<br>Chetouane Tlemcen</p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="info-box">
                   <i class="bi bi-telephone"></i>
-                  <h3>Télephone</h3>
+                  <h3>Téléphone</h3>
                   <p>0658 718 286<br></p>
                 </div>
               </div>
@@ -205,8 +205,8 @@
               <div class="col-md-6">
                 <div class="info-box">
                   <i class="bi bi-clock"></i>
-                  <h3>Heures d'ouverture</h3>
-                  <p>ouvert tout le temps<br></p>
+                  <h3>Horaires d'ouverture</h3>
+                  <p>Ouvert 24H/24<br></p>
                 </div>
               </div>
             </div>
