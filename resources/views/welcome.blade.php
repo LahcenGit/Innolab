@@ -61,10 +61,11 @@
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
-  <section id="hero" class="hero d-flex align-items-center">
+  <section  class="hero d-flex align-items-center">
 
     <div class="container">
       <div class="row">
+
         <div class="col-lg-8 d-flex flex-column justify-content-center mb-4">
           <h1 data-aos="fade-up">InnoLabo, la gestion complète de laboratoire d'analyses médicales</h1>
           <h2 data-aos="fade-up" data-aos-delay="400">Découvrez toutes les fonctionnalités</h2>
@@ -78,11 +79,9 @@
           </div>
         </div>
 
-        <div class="col-lg-4" >
+        <div class="col-md-4" >
             <div class="container h-100">
               <div class="row justify-content-sm-center h-100">
-                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                  
                   <div class="card shadow-lg" style="box-shadow: 0px 5px 30px rgb(65 84 241 / 40%) !important;">
 
                     <div class="text-center ">
@@ -90,10 +89,13 @@
                     </div>
 
                     <div class="card-body p-4">
-                      <h1 class="fs-4 card-title fw-bold ">Espace de connexion</h1>
-                      <p class="form-text text-muted mb-3">
-                        Pour les laboratoires, médecins & patients.
-                      </p>
+
+                      <div class="text-center">
+                        <h1 class="fs-4 card-title fw-bold ">Espace de connexion</h1>
+                        <p class="form-text text-muted mb-3">
+                          Pour les laboratoires, médecins & patients.
+                        </p>
+                      </div>
                       
                       <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -139,7 +141,7 @@
                                             
                                 </div>
         
-                        <div class="align-items-center d-flex">
+                        <div class="d-flex justify-content-center">
                           <button type="submit" class="btn btn-primary btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
                             <span>Connectez-vous</span>
                             <i class="bi bi-arrow-right"></i>
@@ -147,7 +149,8 @@
                         </div>
                       </form>
                     </div>
-                    <div class="card-footer py-3 border-0" style="background-color:#F2F5FC;">
+
+                    <div class="card-footer py-3 border-0" style="background-color:#F2F5FC; ">
                       <div class="text-center">
                         Powered by <b>InnoDev</b> 
                       </div>
@@ -155,7 +158,7 @@
                   </div>
                   
                 </div>
-              </div>
+              
             </div>
         </div>
       </div>
@@ -164,7 +167,6 @@
   </section><!-- End Hero -->
 
   <main id="main">
-
     
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">

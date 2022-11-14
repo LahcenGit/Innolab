@@ -3,36 +3,27 @@
 @section('content')
 
 <div class="content-body mt-4" style="margin-left: 0!important;">
+
 	<div class="container">
+
 	      <div class="row page-titles mx-0 ">
                   <div class="col-sm-12 p-md-0 mt-3 d-flex justify-content-center">
-                  <p> En attentes <span class="badge badge-warning mr-3">{{$document_en_attente}}</span> En cours <span class="badge badge-info mr-3">{{$document_en_cour}}</span> Prêts <span class="badge badge-success mr-3">{{$document_pret}}</span>  Total <span class="badge badge-primary">{{$total}}</span></p>
+                       
+                        <select class="selectpicker" data-live-search="true" id="patient-id"  title='sélectionner un patient...' data-width="30%" >
+                              @foreach ($patients as $patient)
+                              <option value="{{$patient->patient_id}}">{{$patient->getPatient()->first_name}} {{$patient->getPatient()->last_name}} - {{$patient->getPatient()->date_birth}} </option>
+                              @endforeach
+                        </select>
                   </div>
 		</div>
      
 		<div class="row mt-2 mx-0">
-			<div class="col-md-3 p-md-1 ">
+
+			<div class="col-md-12 p-md-1">
 				<div class="card ">
 					<div class="card-header">
-						<h4 class="card-title">Patients</h4>
-					</div>
-					<div class="card-body">
-
-                                    @foreach ($patients as $patient)
-                                    <a  href="{{asset('/dashboard-doctor/'.$patient->patient_id)}}"id="{{$patient->patient_id}}"  @if($id == $patient->patient_id )  class="btn btn-primary m-1" @else class="btn btn-outline-primary m-1" @endif style="width: 100% ">
-                                    @if($patients != null){{$patient->getPatient()->first_name}} {{$patient->getPatient()->last_name}}@endif</a>
-
-                                   
-                                    @endforeach
-
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-9 p-md-1">
-				<div class="card ">
-					<div class="card-header">
-						<h4 class="card-title">Documents <a href="#" class="badge badge-primary">{{$doctor->first_name}} {{$doctor->last_name}}</a></h4>
+                                
+						<h4 class="card-title">Liste des analyses : <a href="#" class="badge badge-primary">{{$doctor->first_name}} {{$doctor->last_name}}</a></h4>
 					</div>
 					<div class="card-body">
                                     @if($documents == null)
@@ -102,6 +93,16 @@
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
 });
+
+$('#patient-id').on('change', function() {
+    window.location.replace("/dashboard-doctor/" + $(this).val());
+});
+
+
+
+
+
+
 $(".detail-document").click(function() {
   
   var id = $(this).data('id');
