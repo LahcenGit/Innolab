@@ -96,7 +96,7 @@
                           <div class="text-center">
                             <h1 class="fs-4 card-title fw-bold ">Dr. {{Auth::user()->doctor->first_name}} </h1>
                             <p class="form-text text-muted mb-3">
-                              Vous êtes connecter ! 
+                              Vous êtes connectés(e) ! 
                             </p>
                           </div>
 
@@ -110,7 +110,7 @@
                           <div class="text-center">
                             <h1 class="fs-4 card-title fw-bold ">Labo.  {{Auth::user()->laboratory->designation}} </h1>
                             <p class="form-text text-muted mb-3">
-                              Vous êtes connecter ! 
+                              Vous êtes connectés(e) ! 
                             </p>
                           </div>
 
@@ -124,7 +124,7 @@
                           <div class="text-center">
                             <h1 class="fs-4 card-title fw-bold ">{{Auth::user()->patient->first_name}} </h1>
                             <p class="form-text text-muted mb-3">
-                              Vous êtes connecter ! 
+                              Vous êtes connectés(e) ! 
                             </p>
                           </div>
 
@@ -233,7 +233,7 @@
       <div class="container" data-aos="fade-up">
 
         <header class="section-header">
-          <h2>Contact</h2>
+          <h2>Pour plus d'informations</h2>
           <p>Contactez-nous</p>
         </header>
 
@@ -253,7 +253,9 @@
                 <div class="info-box">
                   <i class="bi bi-telephone"></i>
                   <h3>Téléphone</h3>
-                  <p>0658 718 286<br></p>
+                  <p>+213 (0) 658 718 286<br>
+                  +213 (0) 799 520 534
+                  </p>
                 </div>
               </div>
               <div class="col-md-6">

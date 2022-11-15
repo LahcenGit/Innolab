@@ -23,7 +23,7 @@
                                     @if($id != null)
                                     <h4 class="card-title">Liste des analyses : <a href="#" class="badge badge-primary">{{$patient_unique->first_name}} {{$patient_unique->last_name}}  - {{$patient_unique->date_birth}}</a></h4>
                                     @else
-                                    <h4 class="card-title">Derniers analyses : </a></h4>
+                                    <h4 class="card-title">Dernières analyses : </a></h4>
                                     @endif
 					</div>
 					<div class="card-body">
