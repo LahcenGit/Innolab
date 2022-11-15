@@ -30,10 +30,15 @@ use Illuminate\Support\Facades\Auth;
     }
 });*/
 
+
+
+
 Route::get('/', function () {
     $error = null;
     return view('welcome',compact('error'));
 });
+
+
 
 
 

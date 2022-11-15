@@ -45,9 +45,8 @@ class DoctorController  extends BaseController
     }
 
 
-    public function update(Request $request , $user_id){
-        $doctor = Doctor::where('user_id',$user_id)->first();
-       
+    public function update(Request $request , $id){
+        $doctor = Doctor::find($id);
         $doctor->first_name = $request->first_name;
         $doctor->last_name = $request->last_name;
         $doctor->laboratory_id = $request->laboratory_id;

@@ -80,10 +80,11 @@ class PatientController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $user_id)
+    public function update(Request $request, $id)
     {
+
         //
-        $patient = Patient::where('user_id',$user_id)->first();
+        $patient = Patient::find($id);
         $patient->first_name = $request->first_name;
         $patient->last_name = $request->last_name;
         $patient->laboratory_id = $request->laboratory_id;
@@ -103,11 +104,11 @@ class PatientController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($user_id)
+    public function destroy($id)
     {
         //
-        $patient = Patient::where('user_id',$user_id)->first();
-        $user = User::where('id',$patient->user_id)->first();
+        $patient = Patient::find($id);
+        $user = User::find($patient->user_id);
         $user->delete();
         $patient->delete();
         return $this->sendResponse($patient, 'Patient was successfully deleted.');
