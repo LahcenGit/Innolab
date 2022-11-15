@@ -28,6 +28,8 @@ class HomeController extends Controller
     }
 
     public function patient(){
+
+        
         $y = null;
        
         $now = Carbon::now();
@@ -58,7 +60,7 @@ class HomeController extends Controller
                                    ->selectRaw('flag_etat')
                                    ->selectRaw('created_at')
                                    ->selectRaw('id')
-                                   ->get();
+                                   ->get()->reverse();
 
        $documents = collect($documents)
         ->groupBy('month');
@@ -100,7 +102,7 @@ class HomeController extends Controller
                                 ->selectRaw('flag_etat')
                                 ->selectRaw('created_at')
                                 ->selectRaw('id')
-                                ->get();
+                                ->get()->reverse();
 
         $documents = collect($documents)
         ->groupBy('month');
@@ -210,9 +212,10 @@ class HomeController extends Controller
 
 
    public function documentDoctor(){
+    
     $id = null;
     $doctor = Doctor::where('user_id',auth::user()->id)->first();
-    $documents = Document::where('doctor_id',$doctor->id)->get();
+    $documents = Document::where('doctor_id',$doctor->id)->limit(30)->get()->reverse();
     $patients =  Document::where('doctor_id',$doctor->id)->get();
     $document_en_attente = Document::where('doctor_id',$doctor->id)
                                     ->where('flag_etat',0)
@@ -225,16 +228,21 @@ class HomeController extends Controller
                                ->count();
         
     $total = $document_en_attente + $document_pret +$document_en_cour;
-    return view('doctor.dashboard-doctor',compact('documents','document_en_attente','document_pret','total','id','patients','doctor','document_en_cour'));
+    return view('doctor.dashboard-doctor',
+           compact('documents','document_en_attente','document_pret','total','id','patients','doctor','document_en_cour'));
    }
 
    public function documentPatient($id){
+
+
     $id = $id;
     $doctor = Doctor::where('user_id',auth::user()->id)->first();
     $documents = Document::where('doctor_id',$doctor->id)
                           ->where('patient_id',$id)
                           ->get();
     $patients =  Document::where('doctor_id',$doctor->id)->get();
+    $patient_unique = Patient::find($id);
+   
     $document_en_attente = Document::where('doctor_id',$doctor->id)
                                     ->where('flag_etat',1)
                                     ->count();
@@ -247,6 +255,7 @@ class HomeController extends Controller
         
     $total = $document_en_attente + $document_pret +$document_en_cour;
 
-    return view('doctor.dashboard-doctor',compact('documents','document_en_attente','document_pret','total','id','patients','doctor','document_en_cour'));
+    return view('doctor.dashboard-doctor',
+           compact('documents','document_en_attente','document_pret','total','id','patients','doctor','document_en_cour','patient_unique'));
    }
 }

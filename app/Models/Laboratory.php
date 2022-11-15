@@ -11,6 +11,10 @@ class Laboratory extends Model
     public function documents(){
         return $this->hasMany(Document::class);
     }
-    
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     
 }

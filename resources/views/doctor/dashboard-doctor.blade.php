@@ -8,22 +8,23 @@
 
 	      <div class="row page-titles mx-0 ">
                   <div class="col-sm-12 p-md-0 mt-3 d-flex justify-content-center">
-                       
                         <select class="selectpicker" data-live-search="true" id="patient-id"  title='sélectionner un patient...' data-width="30%" >
                               @foreach ($patients as $patient)
-                              <option value="{{$patient->patient_id}}">{{$patient->getPatient()->first_name}} {{$patient->getPatient()->last_name}} - {{$patient->getPatient()->date_birth}} </option>
+                              <option value="{{$patient->patient_id}}" {{$patient->patient_id == $id ? 'selected' : ''}}>{{$patient->getPatient()->first_name}} {{$patient->getPatient()->last_name}} - {{$patient->getPatient()->date_birth}} </option>
                               @endforeach
                         </select>
                   </div>
 		</div>
      
 		<div class="row mt-2 mx-0">
-
 			<div class="col-md-12 p-md-1">
 				<div class="card ">
 					<div class="card-header">
-                                
-						<h4 class="card-title">Liste des analyses : <a href="#" class="badge badge-primary">{{$doctor->first_name}} {{$doctor->last_name}}</a></h4>
+                                    @if($id != null)
+                                    <h4 class="card-title">Liste des analyses : <a href="#" class="badge badge-primary">{{$patient_unique->first_name}} {{$patient_unique->last_name}}  - {{$patient_unique->date_birth}}</a></h4>
+                                    @else
+                                    <h4 class="card-title">Derniers analyses : </a></h4>
+                                    @endif
 					</div>
 					<div class="card-body">
                                     @if($documents == null)

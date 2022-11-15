@@ -90,64 +90,123 @@
 
                     <div class="card-body p-4">
 
-                      <div class="text-center">
-                        <h1 class="fs-4 card-title fw-bold ">Espace de connexion</h1>
-                        <p class="form-text text-muted mb-3">
-                          Pour les laboratoires, médecins & patients.
-                        </p>
-                      </div>
-                      
-                      <form method="POST" action="{{ route('login') }}">
-                        @csrf
-                        <div class="mb-3">
-                          <label class="mb-2 text-muted" for="name"><b>Nom d'utilisateur</b> </label>
-                          <input id="name" type="text" class="form-control" name="username" value="" placeholder="User-1234" required autofocus>
-                          <div class="invalid-feedback">
-                            Name is required	
+                      @auth
+
+                        @if(Auth::user()->type == 'doctor')
+                          <div class="text-center">
+                            <h1 class="fs-4 card-title fw-bold ">Dr. {{Auth::user()->doctor->first_name}} </h1>
+                            <p class="form-text text-muted mb-3">
+                              Vous êtes connecter ! 
+                            </p>
                           </div>
+
+                          <div class="d-flex justify-content-center">
+                            <a href="{{asset('dashboard-doctor')}}" class="btn btn-primary btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                              Dashboard  <i class="bi bi-arrow-right"></i> 
+                            </a>
+                          </div>
+
+                        @elseif(Auth::user()->type == 'labo')
+                          <div class="text-center">
+                            <h1 class="fs-4 card-title fw-bold ">Labo.  {{Auth::user()->laboratory->designation}} </h1>
+                            <p class="form-text text-muted mb-3">
+                              Vous êtes connecter ! 
+                            </p>
+                          </div>
+
+                          <div class="d-flex justify-content-center">
+                            <a href="{{asset('dashboard-labo')}}" class="btn btn-primary btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                              Dashboard  <i class="bi bi-arrow-right"></i> 
+                            </a>
+                          </div>
+
+                        @elseif(Auth::user()->type == 'patient')
+                          <div class="text-center">
+                            <h1 class="fs-4 card-title fw-bold ">{{Auth::user()->patient->first_name}} </h1>
+                            <p class="form-text text-muted mb-3">
+                              Vous êtes connecter ! 
+                            </p>
+                          </div>
+
+                          <div class="d-flex justify-content-center">
+                            <a href="{{asset('dashboard-patient')}}" class="btn btn-primary btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                              Dashboard  <i class="bi bi-arrow-right"></i> 
+                            </a>
+                          </div>
+
+                        @endif
+
+                        <div class="d-flex justify-content-center mt-3 mb-4">
+                              <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();" >Déconnexion
+                             </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                              @csrf
+                            </form>
                         </div>
-        
-                        <div class="mb-3">
-                          <label class="mb-2 text-muted" for="password"><b>Mot de passe</b> </label>
-                          <input id="password" type="password" class="form-control" placeholder="********" name="password" required>
-                            <div class="invalid-feedback">
-                              Password is required
+                    
+                      @endauth
+
+                      @guest
+                          <div class="text-center">
+                            <h1 class="fs-4 card-title fw-bold ">Espace de connexion</h1>
+                            <p class="form-text text-muted mb-3">
+                              Pour les laboratoires, médecins & patients.
+                            </p>
+                          </div>
+
+                          <form method="POST" action="{{ route('login') }}">
+                            @csrf
+                            <div class="mb-3">
+                              <label class="mb-2 text-muted" for="name"><b>Nom d'utilisateur</b> </label>
+                              <input id="name" type="text" class="form-control" name="username" value="" placeholder="User-1234" required autofocus>
+                              <div class="invalid-feedback">
+                                Name is required	
+                              </div>
                             </div>
-                        </div>
-
-                         @if ($errors->any())
-                          <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                  <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                          </div><br />
-                        @endif
-
-                        @if($error) 
-                          <div class="alert alert-danger" role="alert">
-                            <span style="font-size: 15px;">  {{$error}}  </span>
-                          </div>
-                        @endif
-
-                        <div class="form-row d-flex justify-content-between mt-4 mb-2">
-                                    <div class="form-group">
-                                        <div class="custom-control custom-checkbox ml-1">
-                                            <input class="form-check-input" type="checkbox" name="remember_me" value="1" id="basic_checkbox_1">
-                                            <label class="custom-control-label" for="basic_checkbox_1">Se souvenir de moi</label>
-                                        </div>
-                                    </div>
-                                            
+            
+                            <div class="mb-3">
+                              <label class="mb-2 text-muted" for="password"><b>Mot de passe</b> </label>
+                              <input id="password" type="password" class="form-control" placeholder="********" name="password" required>
+                                <div class="invalid-feedback">
+                                  Password is required
                                 </div>
-        
-                        <div class="d-flex justify-content-center">
-                          <button type="submit" class="btn btn-primary btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
-                            <span>Connectez-vous</span>
-                            <i class="bi bi-arrow-right"></i>
-                         </button>
-                        </div>
-                      </form>
+                            </div>
+
+                            @if ($errors->any())
+                              <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                      <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                              </div><br />
+                            @endif
+
+                            @if($error) 
+                              <div class="alert alert-danger" role="alert">
+                                <span style="font-size: 15px;">  {{$error}}  </span>
+                              </div>
+                            @endif
+
+                            <div class="form-row d-flex justify-content-between mt-4 mb-2">
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox ml-1">
+                                                <input class="form-check-input" type="checkbox" name="remember_me" value="1" id="basic_checkbox_1">
+                                                <label class="custom-control-label" for="basic_checkbox_1">Se souvenir de moi</label>
+                                            </div>
+                                        </div>
+                                                
+                                    </div>
+            
+                            <div class="d-flex justify-content-center">
+                              <button type="submit" class="btn btn-primary btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                                <span>Connectez-vous</span>
+                                <i class="bi bi-arrow-right"></i>
+                            </button>
+                            </div>
+                          </form>
+                      @endauth
                     </div>
 
                     <div class="card-footer py-3 border-0" style="background-color:#F2F5FC; ">
@@ -289,7 +348,7 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>InnoDev</span></strong>. All Rights Reserved
+        &copy; Copyright 2022 <strong><span>InnoDev</span></strong>. All Rights Reserved
       </div>
       
     </div>
