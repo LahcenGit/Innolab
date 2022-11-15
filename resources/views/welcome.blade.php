@@ -282,15 +282,15 @@
               <div class="row gy-4">
 
                 <div class="col-md-6">
-                  <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+                  <input type="text" id="name" class="form-control" placeholder="Nom" required>
                 </div>
 
                 <div class="col-md-6 ">
-                  <input type="email" class="form-control" id="email" placeholder="Your Email" required>
+                  <input type="email" class="form-control" id="email" placeholder="Email" required>
                 </div>
 
                 <div class="col-md-12">
-                  <input type="text" class="form-control" id="subject" placeholder="Subject" required>
+                  <input type="text" class="form-control" id="subject" placeholder="Sujet" required>
                 </div>
 
                 <div class="col-md-12">
