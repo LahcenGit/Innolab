@@ -96,7 +96,7 @@
                           <div class="text-center">
                             <h1 class="fs-4 card-title fw-bold ">Dr. {{Auth::user()->doctor->first_name}} </h1>
                             <p class="form-text text-muted mb-3">
-                              Vous êtes connectés(e) ! 
+                              Vous êtes connectés ! 
                             </p>
                           </div>
 
@@ -110,7 +110,7 @@
                           <div class="text-center">
                             <h1 class="fs-4 card-title fw-bold ">Labo.  {{Auth::user()->laboratory->designation}} </h1>
                             <p class="form-text text-muted mb-3">
-                              Vous êtes connectés(e) ! 
+                              Vous êtes connectés ! 
                             </p>
                           </div>
 
@@ -124,7 +124,7 @@
                           <div class="text-center">
                             <h1 class="fs-4 card-title fw-bold ">{{Auth::user()->patient->first_name}} </h1>
                             <p class="form-text text-muted mb-3">
-                              Vous êtes connectés(e) ! 
+                              Vous êtes connectés ! 
                             </p>
                           </div>
 
