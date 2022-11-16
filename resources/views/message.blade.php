@@ -30,7 +30,7 @@
                                     </div>
                                     
                                     <div class="alert alert-danger" role="alert">
-                                     <span style="font-size: 15px;">  Vos analyses {{$document->analyse}} sont en cours de traitement par nos équipes. Celles-ci seront disponible prochainement sur votre espace.</span>
+                                     <span style="font-size: 15px;">  Vos analyses sont en cours de traitement par nos équipes. Celles-ci seront disponible prochainement sur votre espace.</span>
                                    </div>
                     
                                 </div>
