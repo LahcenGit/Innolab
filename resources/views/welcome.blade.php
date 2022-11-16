@@ -67,7 +67,7 @@
       <div class="row">
 
         <div class="col-lg-8 d-flex flex-column justify-content-center mb-4">
-          <h1 data-aos="fade-up">InnoLabo, la gestion complète de laboratoire d'analyses médicales</h1>
+          <h1 data-aos="fade-up">InnoLabo, la gestion complète de laboratoires d'analyses médicales</h1>
           <h2 data-aos="fade-up" data-aos-delay="400">Découvrez toutes les fonctionnalités</h2>
           <div data-aos="fade-up" data-aos-delay="600">
             <div class="text-center text-lg-start">
@@ -334,7 +334,7 @@
               <img src="assets/img/logo.png" alt="">
               <span>InnoLabo</span>
             </a>
-            <p>Solution complète de gestion de laboratoire d'analyses medicales</p>
+            <p>Solution complète de gestion de laboratoires d'analyses médicales</p>
             <div class="social-links mt-3">
               <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
               <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>

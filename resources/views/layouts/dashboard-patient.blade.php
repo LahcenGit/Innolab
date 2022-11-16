@@ -99,7 +99,7 @@
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
                                     <img src="{{asset('Dashboard/images/profile/pic1.jpg')}}" width="20" alt=""/>
 									<div class="header-info">
-										<span>Bonjour, <strong>{{Auth::user()->username}}</strong></span>
+										<span>Bonjour, <strong>{{Auth::user()->patient->first_name}} {{Auth::user()->patient->last_name}}</strong></span>
 										<small>Patient Profile</small>
 									</div>
                                 </a>
