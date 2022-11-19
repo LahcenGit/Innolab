@@ -37,7 +37,7 @@
                                         </div>
                                     @else
                                         <div class="alert alert-success text-center" role="alert">
-                                            <span style="font-size: 15px;">  Vos analyses sont prêtes, merci de cliquer sur le boutton pour les télécharger.</span> <br>
+                                            <span style="font-size: 15px;">  Les résultats de vos analyses sont disponibles.Vous pouvez les consulter en cliquant sur le bouton ci-dessous.</span> <br>
                                              <a href="{{asset('show-file/'.$document->token)}}"><button type="button" class="btn btn-success mt-3">Télécharger</button></a> 
                                         </div>
                                     @endif

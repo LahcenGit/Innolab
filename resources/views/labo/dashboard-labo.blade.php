@@ -63,7 +63,7 @@
                                                       <td><strong><i class="fa fa-minus"></i></strong></td>
                                                       @elseif($document->flag_etat == 0)
                                                       <td>
-                                                      <span class="badge badge-light">En cour</span>
+                                                      <span class="badge badge-light">En cours</span>
                                                       </td>
                                                       <td><strong><i class="fa fa-minus"></i></strong></td>
                                                       @else

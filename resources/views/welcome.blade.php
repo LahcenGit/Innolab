@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Innolab</title>
+  <title>Innolabo</title>
   <meta content="" name="description">
 
   <meta content="" name="keywords">
@@ -96,7 +96,7 @@
                           <div class="text-center">
                             <h1 class="fs-4 card-title fw-bold ">Dr. {{Auth::user()->doctor->first_name}} </h1>
                             <p class="form-text text-muted mb-3">
-                              Vous êtes connectés ! 
+                              Vous êtes connecté(e) ! 
                             </p>
                           </div>
 
@@ -110,7 +110,7 @@
                           <div class="text-center">
                             <h1 class="fs-4 card-title fw-bold ">Labo.  {{Auth::user()->laboratory->designation}} </h1>
                             <p class="form-text text-muted mb-3">
-                              Vous êtes connectés ! 
+                              Vous êtes connecté(e) ! 
                             </p>
                           </div>
 
@@ -124,7 +124,7 @@
                           <div class="text-center">
                             <h1 class="fs-4 card-title fw-bold ">{{Auth::user()->patient->first_name}} </h1>
                             <p class="form-text text-muted mb-3">
-                              Vous êtes connectés ! 
+                              Vous êtes connecté(e) ! 
                             </p>
                           </div>
 

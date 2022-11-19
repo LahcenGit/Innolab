@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>InnoLab </title>
+    <title>InnoLabo </title>
     <!-- Favicon icon -->
 	<link href="{{asset('Dashboard/vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('Dashboard/images/il-logo.png')}}">
@@ -75,7 +75,8 @@
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left" style="margin-top: 20px; margin-left:-60px;">
-                        <img src="{{asset('logos/innolab-logo.png')}}" height="100%" width="100%" class="mb-4" alt=""><br/>
+                            <img src="{{asset('Front/assets/img/logo.png')}}" alt="" class="mr-2">
+                            <h2 style="color: #4153F1">InnoLabo</h2>
                         </div>
 
                         <ul class="navbar-nav header-right">
