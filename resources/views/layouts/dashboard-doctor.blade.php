@@ -8,7 +8,7 @@
     <title>InnoLab </title>
     <!-- Favicon icon -->
 	<link href="{{asset('Dashboard/vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('Dashboard/images/ab-logo-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('Dashboard/images/il-logo.png')}}">
     <link href="{{asset('Dashboard/vendor/jqvmap/css/jqvmap.min.css')}}" rel="stylesheet">
 	<link rel="stylesheet" href="{{asset('Dashboard/vendor/chartist/css/chartist.min.css')}}">
     <link href="{{asset('Dashboard/vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet">
