@@ -1,4 +1,4 @@
-<p> <b>{{$data['name']}} </b> , a envoyé  un message depuis InnoLab</p>
+<p> <b>{{$data['user']}} </b> , a envoyé  un message depuis InnoLab</p>
 <p>Sujet : {{$data['subject']}}</p>
 <p>email : {{$data['email']}}</p>
 
