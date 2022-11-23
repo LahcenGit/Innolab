@@ -269,11 +269,12 @@
               <div class="col-md-6">
                 <div class="info-box">
                   <i class="bi bi-clock"></i>
-                  <h3>Horaires d'ouverture</h3>
-                  <p>Ouvert 24H/24<br></p>
+                  <h3>À votre écoute </h3>
+                  <p> 7j/7, 24h/24<br></p>
                 </div>
               </div>
             </div>
+
 
           </div>
 
