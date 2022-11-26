@@ -33,11 +33,13 @@ class HomeController extends Controller
         $user = User::where('id',Auth::user()->id)->first();
         $patient = Patient::where('user_id', $user->id)->first();
         $years = Document::where('patient_id',$patient->id)
+                                   ->where('laboratory_destination_id',Null)
                                    ->selectRaw('YEAR(created_at) year')
                                    ->groupBy('year')
                                    ->get()->reverse();
 
         $recent_year = Document::where('patient_id',$patient->id)
+                                ->where('laboratory_destination_id',Null)
                                 ->selectRaw('YEAR(created_at) year')
                                 ->groupBy('year')
                                 ->latest()
@@ -50,6 +52,7 @@ class HomeController extends Controller
         }
 
         $documents = Document::where('patient_id',$patient->id)
+                                   ->where('laboratory_destination_id',Null)
                                    ->whereYear('created_at',$recent_year)
                                    ->selectRaw('MONTHNAME(created_at) month')
                                    ->selectRaw('analyse')
@@ -67,6 +70,7 @@ class HomeController extends Controller
 
 
         $monthDocuments = Document::where('patient_id',$patient->id)
+                                   ->where('laboratory_destination_id',Null)
                                    ->selectRaw('created_at')
                                    ->selectRaw('MONTH(created_at) month')
                                    ->selectRaw('YEAR(created_at) year')
@@ -85,6 +89,7 @@ class HomeController extends Controller
         $user = User::where('id',Auth::user()->id)->first();
         $patient = Patient::where('user_id', $user->id)->first();
         $years = Document::where('patient_id',$patient->id)
+                                   ->where('laboratory_destination_id',Null)
                                    ->selectRaw('YEAR(created_at) year')
                                    ->groupBy('year')
                                    ->get()->reverse();
@@ -92,6 +97,7 @@ class HomeController extends Controller
         $recent_year = $year;
       
         $documents = Document::where('patient_id',$patient->id)
+                                ->where('laboratory_destination_id',Null)
                                 ->whereYear('created_at',$year)
                                 ->selectRaw('MONTHNAME(created_at) month')
                                 ->selectRaw('analyse')
@@ -115,6 +121,7 @@ class HomeController extends Controller
         $user = User::where('id',Auth::user()->id)->first();
         $patient = Patient::where('user_id', $user->id)->first();
         $document = Document::where('patient_id',$patient->id)
+                              
                                ->whereYear('created_at', $year)
                                ->whereMonth('created_at', $month)
                                ->get();
