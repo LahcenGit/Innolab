@@ -36,21 +36,27 @@ class DocumentController extends BaseController
     public function store(Request $request)
     {
         //
-        $document = new Document();
-       
-        $document->token = $request->token;
-        $document->patient_id = $request->patient_id;
-        $document->doctor_id = $request->doctor_id;
-        $document->laboratory_id = $request->laboratory_id;
-        $document->laboratory_destination_id = $request->laboratory_destination_id;
-        $document->id_logiciel= $request->id_logiciel;
-        $document->document_name = $request->document_name;
-        $document->analyse = $request->analyse;
-        $document->flag_etat = $request->flag_etat;
-        $document->date = $request->date;
-        $document->save();
+        $document_exist = Document::where('id_logiciel',$request->id_logiciel)->first();
+        if($document_exist){
+            return $this->sendResponse($document_exist, 'The document already exists');
+        }
+        else{
+            $document = new Document();
+            $document->token = $request->token;
+            $document->patient_id = $request->patient_id;
+            $document->doctor_id = $request->doctor_id;
+            $document->laboratory_id = $request->laboratory_id;
+            $document->laboratory_destination_id = $request->laboratory_destination_id;
+            $document->id_logiciel= $request->id_logiciel;
+            $document->document_name = $request->document_name;
+            $document->analyse = $request->analyse;
+            $document->flag_etat = $request->flag_etat;
+            $document->date = $request->date;
+            $document->save();
 
-        return $this->sendResponse($document, 'Document was successfully created');
+            return $this->sendResponse($document, 'Document was successfully created');
+        }
+
     }
 
     /**
@@ -72,7 +78,7 @@ class DocumentController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request , $id_logiciel)
-    {       
+    {
         $laboratory_id = $request->laboratory_id;
         $document = Document::where('id_logiciel',$id_logiciel)
                               ->where('laboratory_id',$laboratory_id)
@@ -95,7 +101,7 @@ class DocumentController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id_logiciel)
-    {   
+    {
         $document = Document::where('id_logiciel',$id_logiciel)->first();
         $document->delete();
         return $this->sendResponse($document, 'Document was successfully deleted.');
