@@ -39,7 +39,7 @@ class PatientController extends BaseController
             if($user){
                 return $this->sendResponse($user, 'User exist');
             }
-        
+
             $user = new User();
             $user->username = $request->username;
             $user->password = Hash::make($request['password']);
@@ -59,7 +59,7 @@ class PatientController extends BaseController
             $patient->sexe = $request->sexe;
             $patient->save();
             return $this->sendResponse($patient, 'Patient was successfully created');
-        
+
     }
 
     /**

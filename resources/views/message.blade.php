@@ -10,18 +10,19 @@
         <link rel="icon" type="image/png" sizes="16x16" href="{{asset('Dashboard/images/il-logo.png')}}">
         <link href="{{asset('Dashboard/css/style.css')}}" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"  />
-    
-    
+
+
     </head>
 
 <body class="h-100">
-    <div class="authincation h-100">
+   <div class="authincation h-100">
         <div class="container h-100">
             <div class="row justify-content-center h-100 align-items-center">
                 <div class="col-md-6">
                     <div class="authincation-content">
                         <div class="row no-gutters">
                             <div class="col-xl-12">
+                                @if($document)
                                 <div class="auth-form">
                                     <div class="text-center">
                                         <div class="row d-flex justify-content-center mb-4" >
@@ -30,19 +31,32 @@
                                         <h4 class="text-center mb-4 " style="color:#4153F1 ">{{Str::ucfirst($document->getPatient()->first_name)}} {{Str::ucfirst($document->getPatient()->last_name)}}<br>
                                         {{$document->getPatient()->date_birth}}, @if($document->getPatient()->sexe == 0) Masculin @else Féminin @endif</h4>
                                     </div>
-                                    
+
                                     @if(!$exist_file || $document->flag_etat == 0 || $document->flag_etat == 1)
                                         <div class="alert alert-danger" role="alert">
                                         <span style="font-size: 15px;">  Vos analyses sont en cours de traitement par nos équipes. Celles-ci seront disponible prochainement sur votre espace.</span>
                                         </div>
+
                                     @else
                                         <div class="alert alert-success text-center" role="alert">
                                             <span style="font-size: 15px;">  Les résultats de vos analyses sont disponibles.Vous pouvez les consulter en cliquant sur le bouton ci-dessous.</span> <br>
-                                             <a href="{{asset('show-file/'.$document->token)}}"><button type="button" class="btn btn-success mt-3">Télécharger</button></a> 
+                                             <a href="{{asset('show-file/'.$document->token)}}"><button type="button" class="btn btn-success mt-3">Télécharger</button></a>
                                         </div>
                                     @endif
-                    
+
                                 </div>
+                                @else
+                                <div class="auth-form">
+                                    <div class="text-center">
+                                        <div class="row d-flex justify-content-center mb-4" >
+                                            <h1 style="color: #4153F1">InnoLabo</h1>
+                                        </div>
+                                    </div>
+                                        <div class="alert alert-danger" role="alert">
+                                        <span style="font-size: 15px;"> Vos analyses n'existent pas encore sur le serveur.</span>
+                                        </div>
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>
