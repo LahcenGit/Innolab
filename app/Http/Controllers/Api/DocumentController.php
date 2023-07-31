@@ -36,7 +36,7 @@ class DocumentController extends BaseController
         //
         $document_exist = Document::where('id_logiciel',$request->id_logiciel)->where('laboratory_id',$request->laboratory_id)->first();
         if($document_exist){
-            return $this->sendResponse($document_exist, 'The document already exists');
+            return $this->sendResponse($document_exist, 'The document already existes');
         }
         else{
             $document = new Document();
