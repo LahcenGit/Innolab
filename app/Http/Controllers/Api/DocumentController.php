@@ -12,10 +12,7 @@ use App\Http\Controllers\Api\BaseController as BaseController;
 
 class DocumentController extends BaseController
 {
-     public function __construct()
-    {
-        $this->middleware('auth:sanctum');
-    }
+
 
     /**
      * Display a listing of the resource.
@@ -39,7 +36,7 @@ class DocumentController extends BaseController
         //
         $document_exist = Document::where('id_logiciel',$request->id_logiciel)->where('laboratory_id',$request->laboratory_id)->first();
         if($document_exist){
-            return $this->sendError($document_exist, 'The document already exists');
+            return $this->sendResponse($document_exist, 'The document already exists');
         }
         else{
             $document = new Document();
@@ -106,5 +103,21 @@ class DocumentController extends BaseController
         $document = Document::where('id_logiciel',$id_logiciel)->first();
         $document->delete();
         return $this->sendResponse($document, 'Document was successfully deleted.');
+    }
+
+
+    public function isExist($id_logiciel , $laboratory_id){
+        $document = Document::where('id_logiciel',$id_logiciel)
+                            ->where('laboratory_id',$laboratory_id)
+                            ->first();
+
+        if($document){
+            return $this->sendResponse($document, 'The document exists.');
+        }
+
+        else{
+            $document = "hind";
+            return $this->sendResponse($document,'Document does not exist');
+        }
     }
 }
