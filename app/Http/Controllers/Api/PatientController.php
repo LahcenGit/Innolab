@@ -37,7 +37,11 @@ class PatientController extends BaseController
             $user = User::where('username',$request->username)->first();
 
             if($user){
-                return $this->sendResponse($user, 'User exist');
+                $user->password = Hash::make($request['password']);
+                $user->save();
+                $patient = Patient::where('user_id',$user->id)->first();
+
+                return $this->sendResponse($patient, 'Patient exist');
             }
 
             $user = new User();
