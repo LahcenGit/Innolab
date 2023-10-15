@@ -98,11 +98,18 @@ class DocumentController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_logiciel)
+    public function deleteDocument($id_logiciel , $laboratory_id)
     {
-        $document = Document::where('id_logiciel',$id_logiciel)->first();
-        $document->delete();
-        return $this->sendResponse($document, 'Document was successfully deleted.');
+        $document = Document::where('id_logiciel',$id_logiciel)->where('laboratory_id',$laboratory_id)->first();
+        if($document){
+            $document->delete();
+            return $this->sendResponse($document, 'Document was successfully deleted.');
+        }
+        else{
+            $document = null;
+            return $this->sendResponse($document, 'Document does not exist.');
+        }
+
     }
 
 

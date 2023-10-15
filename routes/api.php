@@ -29,7 +29,7 @@ Route::apiResource('/document',DocumentController::class);
 Route::apiResource('/doctor',DoctorController::class);
 Route::apiResource('/detail-document',DetaildocumentController::class);
 Route::get('/is-exist/{id_logiciel}/{laboratory_id}', [App\Http\Controllers\Api\DocumentController::class,'isExist']);
-
+Route::delete('/delete-document/{id_logiciel}/{laboratory_id}', [App\Http\Controllers\Api\DocumentController::class,'deleteDocument']);
 Route::post('/login', [App\Http\Controllers\Api\ApiAuthController::class,'login']);
 
 
